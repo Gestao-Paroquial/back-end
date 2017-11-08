@@ -12,7 +12,8 @@
 
     </head>
     <body>        
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>    
+        <div id = "app"></div>
+        <script src="../../../public/js/app.js'"></script>    
         <h1>Teste</h1>    
     </body>
     

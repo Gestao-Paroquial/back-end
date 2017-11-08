@@ -32,7 +32,23 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    data(){
+      return {
+        users:[]
+      }
+    },
+    created(){
+      this.fetchUsers();
+    },
+    methods:{
+      fetchUsers(){
+        this.$http.get('/').then(response => {
+          this.users = response.data.users;  
+        });
+      }
+    }
+  }
 </script>
 
 <style lang="scss"></style>
