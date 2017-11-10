@@ -27,7 +27,7 @@ Route::group(['middleware' => ['web']], function(){
         Route::get('add', ['uses' => 'UsersController@create']);
         Route::post('add', ['uses' => 'UsersController@post']); 
     });   
-    Route::get('usuarios', ['uses' => 'UsersController@usuario']);
+    Route::get('api/usuarios', ['uses' => 'UsersController@usuario']);
 });
 Route::resource('note', 'NoteController');
 
