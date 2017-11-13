@@ -30,10 +30,10 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('api/usuarios', ['uses' => 'UsersController@usuario']);
 });
 Route::resource('note', 'NoteController');
-Route::resource('pastorais', 'PastoraisController');
-Route::resource('comunidades', 'ComunidadesController');
-Route::resource('membros', 'MembrosController');
-Route::resource('membrosPastorais', 'MembrosPastoraisController');
+Route::resource('api/pastorais', 'PastoraisController');
+Route::resource('api/comunidades', 'ComunidadesController');
+Route::resource('api/membros', 'MembrosController');
+Route::resource('api/membrosPastorais', 'MembrosPastoraisController');
 
 
 /*Route::group(['middleware' => 'cors'], function(){
