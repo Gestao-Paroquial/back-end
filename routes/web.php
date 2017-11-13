@@ -26,10 +26,19 @@ Route::group(['middleware' => ['web']], function(){
         Route::get('/', ['uses' => 'UsersController@index']);        
         Route::get('add', ['uses' => 'UsersController@create']);
         Route::post('add', ['uses' => 'UsersController@post']); 
-    });   
+    });     
     Route::get('api/usuarios', ['uses' => 'UsersController@usuario']);
 });
 Route::resource('note', 'NoteController');
+Route::resource('pastorais', 'PastoraisController');
+Route::resource('comunidades', 'ComunidadesController');
+Route::resource('membros', 'MembrosController');
+Route::resource('membrosPastorais', 'MembrosPastoraisController');
+
+
+/*Route::group(['middleware' => 'cors'], function(){
+    Route::get('api/usuarios', 'UsersController@usuario');
+});*/
 
 
 
