@@ -36,9 +36,11 @@ Route::resource('api/membros', 'MembrosController');
 Route::resource('api/membrosPastorais', 'MembrosPastoraisController');
 
 
-/*Route::group(['middleware' => 'cors'], function(){
+Route::group(['middleware' => 'cors'], function(){
     Route::get('api/usuarios', 'UsersController@usuario');
-});*/
+    // Route::get('api/comunidades', 'ComunidadesController');
+    Route::resource('api/comunidades', 'ComunidadesController');
+});
 
 
 
