@@ -12,7 +12,7 @@ class Comunidades extends Model
     ];
     
 
-    public function comunidade()
+    public function pastorais()
     {
         return $this->belongsTo(Pastorais::class, "id", "id");
     }

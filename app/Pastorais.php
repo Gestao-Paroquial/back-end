@@ -12,8 +12,8 @@ class Pastorais extends Model
         'comunidades_id','nome', 'descricao',
     ];
 
-    public function pastorais()
+    public function comunidade()
     {
-        return $this->hasOne(Comunidades::class, "id", "id");
+        return $this->belongsTo(Comunidades::class, "comunidades_id", "id");
     }
 }

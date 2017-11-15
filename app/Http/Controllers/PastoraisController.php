@@ -19,7 +19,7 @@ class PastoraisController extends Controller
         // $pastorais = Pastorais::findOrFail($id);
 
         
-        $ep = new Comunidades();
+        $ep = new Pastorais();
         
         $result = $ep->with('comunidade')
         ->where('id', $id)
