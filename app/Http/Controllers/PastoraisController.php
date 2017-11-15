@@ -11,8 +11,14 @@ class PastoraisController extends Controller
 {
     public function index()
     {
+        $ep = new Pastorais();
         
-        return response()->json(Pastorais::all());
+        $result = $ep->with('comunidade')        
+        ->get();
+
+        return $result; 
+
+        // return response()->json(Pastorais::all());
     }
     public function show($id)
     {
