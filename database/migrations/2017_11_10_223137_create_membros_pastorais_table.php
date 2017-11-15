@@ -18,16 +18,16 @@ class CreateMembrosPastoraisTable extends Migration
             $table->integer('comunidades_id')->unsigned();
             $table->integer('pastorais_id')->unsigned();
             $table->string('nome',100);
-            $table->string('email',100);
-            $table->string('Telefone',13);
-            $table->string('Celular',13);
-            $table->string('Endereco',150);
-            $table->string('nro',10);
-            $table->string('compl',50);
-            $table->string('bairro',50);
-            $table->string('cidade',50);
-            $table->string('uf',2);
-            $table->string('cep',8);
+            $table->string('email',100)->nullable();
+            $table->string('telefone',13);
+            $table->string('celular',13);
+            $table->string('endereco',150)->nullable();
+            $table->string('nro',10)->nullable();
+            $table->string('compl',50)->nullable();
+            $table->string('bairro',50)->nullable();
+            $table->string('cidade',50)->nullable();
+            $table->string('uf',2)->nullable();
+            $table->string('cep',8)->nullable();
             $table->timestamps();
 
             $table->foreign('comunidades_id')

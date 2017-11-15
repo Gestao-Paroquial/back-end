@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Pastorais extends Model
 {
     protected $fillable = [
-        'note'
+        'comunidades_id','name', 'descricao',
     ];
 }

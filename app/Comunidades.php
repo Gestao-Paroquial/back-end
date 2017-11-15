@@ -7,17 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comunidades extends Model
 {
     protected $fillable = [
-        'nome',
-        'email',
-        'cnpj',
-        'Telefone',
-        'Celular',
-        'Endereco',
-        'nro',
-        'compl',
-        'bairro',
-        'cidade',  
-        'uf',      
-        'cep'
+        'nome', 'email' ,'cnpj' ,'telefone' , 'celular', 'endereco', 'nro', 'compl',
+        'bairro', 'cidade', 'uf', 'cep',
     ];
 }

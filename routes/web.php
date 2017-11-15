@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function(){
 Route::resource('note', 'NoteController');
 Route::resource('api/pastorais', 'PastoraisController');
 Route::resource('api/comunidades', 'ComunidadesController');
-Route::resource('api/membros', 'MembrosController');
+// Route::resource('api/membros', 'MembrosController');
 Route::resource('api/membrosPastorais', 'MembrosPastoraisController');
 
 
