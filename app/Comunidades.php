@@ -10,4 +10,10 @@ class Comunidades extends Model
         'nome', 'email' ,'cnpj' ,'telefone' , 'celular', 'endereco', 'nro', 'compl',
         'bairro', 'cidade', 'uf', 'cep',
     ];
+    
+
+    public function comunidade()
+    {
+        return $this->belongsTo(Pastorais::class, "id", "id");
+    }
 }
