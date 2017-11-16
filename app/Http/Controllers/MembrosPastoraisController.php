@@ -45,7 +45,7 @@ class MembrosPastoraisController extends Controller
     }
     public function destroy($id)
     {
-        $membrosPastorais = Comunidades::findOrFail($id);
+        $membrosPastorais = MembrosPastorais::findOrFail($id);
         $membrosPastorais->delete();
         return response()->json(['message'=>'removido com sucesso']);
     }
