@@ -17,7 +17,7 @@ class CreateComunidadesTable extends Migration
             $table->increments('id');
             $table->string('nome',100);
             $table->string('email',100);
-            $table->string('cnpj',15)->nullable();
+            $table->string('cnpj',18)->nullable();
             $table->string('telefone',14);
             $table->string('celular',15)->nullable();
             $table->string('endereco',150);
