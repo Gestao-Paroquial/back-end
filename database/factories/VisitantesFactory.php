@@ -7,6 +7,6 @@ $factory->define(App\Visitantes::class, function (Faker $faker) {
     	'comunidades_id' => $faker->numberBetween($min = 1, $max = 2),
         'nome' 		=> $faker->name,
 		'email' 	=> $faker->unique()->safeEmail,
-		'telefone' 	=> '1122223333',
+		'telefone' 	=> '(11) 11111-1111',
     ];
 });
