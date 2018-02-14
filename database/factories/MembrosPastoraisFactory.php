@@ -4,7 +4,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\MembrosPastorais::class, function (Faker $faker) {
 	return [
-		'comunidades_id'=> $faker->numberBetween($min = 1, $max = 2),
 		'pastorais_id'	=> $faker->numberBetween($min = 1, $max = 20),
 		'nome'    		=> 	$faker->name,
 		'email'    		=>	$faker->unique()->safeEmail,
