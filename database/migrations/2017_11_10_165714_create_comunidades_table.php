@@ -17,16 +17,16 @@ class CreateComunidadesTable extends Migration
             $table->increments('id');
             $table->string('nome',100);
             $table->string('email',100);
-            $table->string('cnpj',15)->nullable();
-            $table->string('telefone',13);
-            $table->string('celular',13)->nullable();
+            $table->string('cnpj',18)->nullable();
+            $table->string('telefone',14);
+            $table->string('celular',15)->nullable();
             $table->string('endereco',150);
             $table->string('nro',10);
             $table->string('compl',50)->nullable();
             $table->string('bairro',50);
             $table->string('cidade',50);
             $table->string('uf',2)->nullable();
-            $table->string('cep',8);
+            $table->string('cep',9);
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateVisitantesTable extends Migration
             $table->integer('comunidades_id')->unsigned();
             $table->string('nome',100);
             $table->string('email',100);  
-            $table->string('telefone',13)->nullable();          
+            $table->string('telefone',15)->nullable();          
             $table->timestamps();
 
             $table->foreign('comunidades_id')
