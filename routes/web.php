@@ -34,6 +34,7 @@ Route::resource('api/pastorais', 'PastoraisController');
 Route::resource('api/comunidades', 'ComunidadesController');
 Route::resource('api/visitantes', 'VisitantesController');
 Route::resource('api/membrosPastorais', 'MembrosPastoraisController');
+Route::resource('api/mensagensParoco', 'MensagensParocoController');
 
 
 // Route::group(['middleware' => 'cors'], function(){
