@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('uploadImagem', ['uses' => 'ImagesController@save']);
+Route::resource('note', 'NoteController');
+Route::resource('pastorais', 'PastoraisController');
+Route::resource('comunidades', 'ComunidadesController');
+Route::resource('visitantes', 'VisitantesController');
+Route::resource('membrosPastorais', 'MembrosPastoraisController');
+Route::resource('mensagensParoco', 'MensagensParocoController');
+Route::resource('eventosHome', 'EventosHomeController');
