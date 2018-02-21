@@ -28,6 +28,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('add', ['uses' => 'UsersController@post']);
     });
     Route::get('api/usuarios', ['uses' => 'UsersController@usuario']);
+
+    Route::post('/api/uploadImagem', ['uses' => 'ImageUploadController@save']);
 });
 Route::resource('note', 'NoteController');
 Route::resource('api/pastorais', 'PastoraisController');
