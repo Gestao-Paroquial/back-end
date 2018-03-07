@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('uploadImagem', ['uses' => 'ImagesController@save']);
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
@@ -25,3 +21,18 @@ Route::resource('visitantes', 'VisitantesController');
 Route::resource('membrosPastorais', 'MembrosPastoraisController');
 Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('eventosHome', 'EventosHomeController');
+Route::resource('user', 'UsersController');
+
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+Route::post('recover', 'AuthController@recover');
+Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
+
+Route::group(['middleware' => ['jwt.auth']], function() {
+    Route::get('logout', 'AuthController@logout');
+
+    //Rota para validar os tokens
+    Route::get('validateToken', function(){
+        return response()->json(['success'=>true]);
+    });
+});
