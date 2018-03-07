@@ -26,10 +26,13 @@ Route::resource('user', 'UsersController');
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('recover', 'AuthController@recover');
+Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
 
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('logout', 'AuthController@logout');
-    Route::get('test', function(){
-        return response()->json(['foo'=>'bar']);
+
+    //Rota para validar os tokens
+    Route::get('validateToken', function(){
+        return response()->json(['success'=>true]);
     });
 });

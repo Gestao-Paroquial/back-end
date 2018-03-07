@@ -145,7 +145,7 @@ class AuthController extends Controller
     }
 
 
-        /**
+    /**
      * API Recover Password
      *
      * @param Request $request
