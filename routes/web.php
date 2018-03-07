@@ -9,8 +9,10 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.request');
+Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('password.reset');
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
@@ -27,16 +29,4 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('add', ['uses' => 'UsersController@create']);
         Route::post('add', ['uses' => 'UsersController@post']);
     });
-    Route::get('api/usuarios', ['uses' => 'UsersController@usuario']);
 });
-Route::resource('note', 'NoteController');
-Route::resource('api/pastorais', 'PastoraisController');
-Route::resource('api/comunidades', 'ComunidadesController');
-Route::resource('api/visitantes', 'VisitantesController');
-Route::resource('api/membrosPastorais', 'MembrosPastoraisController');
-Route::resource('api/mensagensParoco', 'MensagensParocoController');
-
-
-// Route::group(['middleware' => 'cors'], function(){
-//     Route::resource('api/comunidades', 'ComunidadesController');
-// });

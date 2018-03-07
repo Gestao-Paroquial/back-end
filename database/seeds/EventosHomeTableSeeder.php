@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MensagensParocoTableSeeder extends Seeder
+class EventosHomeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class MensagensParocoTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\MensagensParoco::class, 5)->create();
+        //
     }
 }
