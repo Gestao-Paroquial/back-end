@@ -11,6 +11,6 @@ class MensagensParocoTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\MensagensParoco::class, 20)->create();
+        factory(App\MensagensParoco::class, 5)->create();
     }
 }
