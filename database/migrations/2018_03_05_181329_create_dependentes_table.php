@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePastoraisTable extends Migration
+class CreateDependentesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,24 @@ class CreatePastoraisTable extends Migration
      */
     public function up()
     {
-        Schema::create('pastorais', function (Blueprint $table) {
+        Schema::create('dependentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('comunidades_id')->unsigned();
-            $table->integer('classeTelefones_id')->unsigned();
+            $table->integer('membros_id')->unsigned();
+            $table->integer('tipo_dependentes_id')->unsigned();
             $table->string('nome',100);
-            $table->string('descricao',255);            
+            $table->datetime('dataNasc');
+
             $table->timestamps();
 
-            $table->foreign('comunidades_id')
+            $table->foreign('membros_id')
                             ->references('id')
-                            ->on('comunidades')
+                            ->on('membros')
                             ->onDelete('cascade');
 
-            $table->foreign('classeTelefones_id')
+            $table->foreign('tipo_dependentes_id')
                             ->references('id')
-                            ->on('classe_telefones')
+                            ->on('tipo_dependentes')
                             ->onDelete('cascade');
-
         });
     }
 
@@ -41,6 +41,6 @@ class CreatePastoraisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pastorais');
+        Schema::dropIfExists('dependentes');
     }
 }

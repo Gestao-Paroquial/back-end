@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMensagemParocosTable extends Migration
+class CreateTipoPagamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateMensagemParocosTable extends Migration
      */
     public function up()
     {
-        Schema::create('mensagens_parocos', function (Blueprint $table) {
+        Schema::create('tipo_pagamentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('titulo',100);
-            $table->string('subtitulo',100);  
-            $table->mediumText('mensagem'); 
-            $table->string('link',200)->nullable(); 
             $table->timestamps();
-            
         });
     }
 
@@ -31,6 +26,6 @@ class CreateMensagemParocosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mensagens_parocos');
+        Schema::dropIfExists('tipo_pagamentos');
     }
 }
