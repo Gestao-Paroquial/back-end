@@ -1,16 +1,19 @@
 # Back-End do sistema de gestão paroquial
 
-## Quck Installation
+## Guia de instalação
+  
 
-  
-    git clone https://github.com/Gestao-Paroquial/back-end.git
-
-    cd back-end
-
-    composer install
-
-    php artisan migrate
+       git clone https://github.com/Gestao-Paroquial/back-end.git
     
-    php artisan db:seed
+       cd back-end
+    
+       composer install
+       
+	   # Lembre-se de criar o arquivo .env com base no arquivo .env.sample lá você deve colocar as suas configurações de banco de dados, email, etc...
+	   
+       php artisan migrate
+        
+       php artisan db:seed
+    
+       php artisan serve  
 
-    php artisan serve  
