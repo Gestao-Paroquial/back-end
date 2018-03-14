@@ -121,8 +121,11 @@ class AuthController extends Controller
             return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
         }
 
-        // all good so return the token
-        return response()->json(['success' => true, 'token' => $token ]);
+        // get user by email
+        $user = User::where('email', $request->email)->first();
+
+        // all good so return the token with the user
+        return response()->json(['success' => true, 'token' => $token, 'user' =>  $user->only('email', 'name', 'id')]);
     }
 
     /**
