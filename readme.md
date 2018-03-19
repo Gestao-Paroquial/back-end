@@ -20,28 +20,3 @@
        php artisan jwt:secret
     
        php artisan serve  
-
-
-# Criando um novo usuário
-
-Vá até o console do navegador e execute esse código
-
-```
-    const user = {
-      name: "Padre",
-      email: "admin@admin.com",
-      password: "1234"
-    };
-    
-    fetch('http://localhost:8000/api/register', {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      }),
-      body: JSON.stringify(user)
-    }).then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      console.error(error);
-    });
-```
