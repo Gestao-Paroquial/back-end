@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MembrosPastoraisTableSeeder extends Seeder
+class DependentesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class MembrosPastoraisTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\MembrosPastorais::class, 80)->create();
+        factory(App\Dependente::class, 30)->create();
     }
 }

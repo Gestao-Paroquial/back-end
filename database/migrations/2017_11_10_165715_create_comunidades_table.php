@@ -15,7 +15,7 @@ class CreateComunidadesTable extends Migration
     {
         Schema::create('comunidades', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('classeTelefones_id')->unsigned();
+            $table->integer('classe_telefone_id')->unsigned();
             $table->string('nome',100);
             $table->string('email',100);
             $table->string('cnpj',18)->nullable();
@@ -28,7 +28,7 @@ class CreateComunidadesTable extends Migration
             $table->string('cep',9);
             $table->timestamps();
 
-            $table->foreign('classeTelefones_id')
+            $table->foreign('classe_telefone_id')
                             ->references('id')
                             ->on('classe_telefones')
                             ->onDelete('cascade');

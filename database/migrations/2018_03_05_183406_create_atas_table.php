@@ -15,7 +15,17 @@ class CreateAtasTable extends Migration
     {
         Schema::create('atas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('comunidade_id')->unsigned();
+            $table->datetime('dataAta');
+            $table->string('descricao');
+            $table->decimal('totalGastos')->nullable();
+            $table->decimal('totalArrecadacoes')->nullable();
             $table->timestamps();
+
+            $table->foreign('comunidade_id')
+                            ->references('id')
+                            ->on('comunidades')
+                            ->onDelete('cascade');
         });
     }
 

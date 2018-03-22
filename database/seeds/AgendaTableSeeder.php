@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PastoraisTableSeeder extends Seeder
+class AgendaTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class PastoraisTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Pastorais::class, 20)->create();
+        factory(App\Agenda::class, 20)->create();
     }
 }
