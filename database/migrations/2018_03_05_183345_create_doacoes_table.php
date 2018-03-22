@@ -15,7 +15,23 @@ class CreateDoacoesTable extends Migration
     {
         Schema::create('doacoes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('comunidade_id')->unsigned();
+            $table->integer('tipo_doacoe_id')->unsigned();
+            $table->datetime('data');
+            $table->string('descricao');
+            $table->decimal('valor');
             $table->timestamps();
+
+
+            $table->foreign('comunidade_id')
+                            ->references('id')
+                            ->on('comunidades')
+                            ->onDelete('cascade');
+
+            $table->foreign('tipo_doacoe_id')
+                            ->references('id')
+                            ->on('tipo_doacoes')
+                            ->onDelete('cascade');
         });
     }
 

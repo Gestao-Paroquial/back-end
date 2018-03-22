@@ -2,10 +2,11 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Pastorais::class, function (Faker $faker) {
+$factory->define(App\Pastorai::class, function (Faker $faker) {
     return [
-        'comunidades_id' => $faker->numberBetween($min = 1, $max = 2),
-        'nome' 		=> $faker->jobTitle,
-		'descricao' 	=> $faker->text,
+        'comunidade_id' => $faker->numberBetween($min = 1, $max = 2),
+        'classe_telefone_id' => 2,
+        'nome' 		=> 'Pastorais',
+		'descricao' 	=> 'Descrição das pastorais',
     ];
 });

@@ -15,7 +15,21 @@ class CreatePagamentosTable extends Migration
     {
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('agenda_id')->unsigned();
+            $table->integer('tipo_pagamento_id')->unsigned();
+            $table->datetime('data_Pagamento');
+            $table->decimal('valor');
             $table->timestamps();
+
+            $table->foreign('agenda_id')
+                            ->references('id')
+                            ->on('agendas')
+                            ->onDelete('cascade');
+
+            $table->foreign('tipo_pagamento_id')
+                            ->references('id')
+                            ->on('tipo_pagamentos')
+                            ->onDelete('cascade');                
         });
     }
 

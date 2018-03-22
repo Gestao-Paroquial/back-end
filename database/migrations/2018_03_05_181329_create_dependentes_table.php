@@ -15,19 +15,19 @@ class CreateDependentesTable extends Migration
     {
         Schema::create('dependentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('membros_id')->unsigned();
-            $table->integer('tipo_dependentes_id')->unsigned();
+            $table->integer('membro_id')->unsigned();
+            $table->integer('tipo_dependente_id')->unsigned();
             $table->string('nome',100);
-            $table->datetime('dataNasc');
+            $table->datetime('data_Nascimento');
 
             $table->timestamps();
 
-            $table->foreign('membros_id')
+            $table->foreign('membro_id')
                             ->references('id')
                             ->on('membros')
                             ->onDelete('cascade');
 
-            $table->foreign('tipo_dependentes_id')
+            $table->foreign('tipo_dependente_id')
                             ->references('id')
                             ->on('tipo_dependentes')
                             ->onDelete('cascade');

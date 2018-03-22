@@ -11,6 +11,6 @@ class ComunidadesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Comunidades::class, 2)->create();
+        factory(App\Comunidade::class, 2)->create();
     }
 }

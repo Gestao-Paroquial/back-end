@@ -1,31 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Comunidades;
+use App\Comunidade;
 use Illuminate\Http\Request;
 
 class ComunidadesController extends Controller
 {
     public function index(){
-        return response()->json(Comunidades::all());
+        $comunidade = new comunidade();
+
+        $result = $comunidade->with(['telefones:id,classe_telefone_id,id_entidade,telefone','doacoes','pastorais:id,comunidade_id,nome'])->get();
+        return $result;
     }
     public function show($id){
-        $comunidades = Comunidades::findOrFail($id);
-        return response()->json($comunidades);
+        $comunidade = new comunidade();
+        
+        $result = $comunidade->with(['telefones:id,classe_telefone_id,id_entidade,telefone','pastorais:id,comunidade_id,nome'])->where('id', $id)->first();
+        return $result;
     }
     public function store(Request $request){
-        $comunidades = Comunidades::create($request->all());
-        return response()->json($comunidades);
+        $comunidade = Comunidade::create($request->all());
+        return response()->json($comunidade);
     }
     public function update(Request $request, $id){
-        $comunidades = Comunidades::findOrFail($id);
-        $comunidades->fill($request->all());
-        $comunidades->save();
-        return response()->json($comunidades);
+        $comunidade = Comunidade::findOrFail($id);
+        $comunidade->fill($request->all());
+        $comunidade->save();
+        return response()->json($comunidade);
     }
     public function destroy($id){
-        $comunidades = Comunidades::findOrFail($id);
-        $comunidades->delete();
+        $comunidade = Comunidade::findOrFail($id);
+        $comunidade->delete();
         return response()->json(['message'=>'removido com sucesso']);
     }
 }

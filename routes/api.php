@@ -18,10 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('uploadImagem', ['uses' => 'ImagesController@save']);
+Route::resource('agenda', 'AgendasController');
+Route::resource('atas', 'AtasController');
+Route::resource('batismos', 'BatismosController');
+Route::resource('casamentos', 'CasamentosController');
+Route::resource('comunidades', 'ComunidadesController');
+Route::resource('dizimos', 'DizimosController');
+Route::resource('doacoes', 'DoacoesController');
+Route::resource('eventosHome', 'EventosHomeController');
+Route::resource('membros', 'MembrosController');
+Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
-Route::resource('comunidades', 'ComunidadesController');
-Route::resource('visitantes', 'VisitantesController');
-Route::resource('membrosPastorais', 'MembrosPastoraisController');
-Route::resource('mensagensParoco', 'MensagensParocoController');
-Route::resource('eventosHome', 'EventosHomeController');

@@ -15,7 +15,7 @@ class CreateTipoDependentesTable extends Migration
     {
         Schema::create('tipo_dependentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Descricao',100);
+            $table->string('descricao',100);
             $table->timestamps();
         });
     }

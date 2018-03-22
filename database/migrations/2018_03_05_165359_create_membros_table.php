@@ -15,15 +15,15 @@ class CreateMembrosTable extends Migration
     {
         Schema::create('membros', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('comunidades_id')->unsigned();
-            $table->integer('tipo_membros_id')->unsigned();
-            $table->integer('classeTelefones_id')->unsigned();            
+            $table->integer('comunidade_id')->unsigned();
+            $table->integer('tipo_membro_id')->unsigned();
+            $table->integer('classe_telefone_id')->unsigned();            
             $table->string('nome',100);
             $table->string('email',100);
-            $table->datetime('dataNasc')->nullable();
-            $table->string('nomePai',100)->nullable();
-            $table->string('nomeMae',100)->nullable();
-            $table->boolean('estadoCivil')->nullable();
+            $table->datetime('data_Nascimento')->nullable();
+            $table->string('nome_Pai',100)->nullable();
+            $table->string('nome_Mae',100)->nullable();
+            $table->boolean('estado_Civil')->nullable();
             $table->boolean('batizado')->nullable();
             $table->boolean('crismado')->nullable();
             $table->boolean('1_eucaristia')->nullable();
@@ -39,17 +39,17 @@ class CreateMembrosTable extends Migration
 
 
             
-            $table->foreign('comunidades_id')
+            $table->foreign('comunidade_id')
                             ->references('id')
                             ->on('comunidades')
                             ->onDelete('cascade');
 
-            $table->foreign('tipo_membros_id')
+            $table->foreign('tipo_membro_id')
                             ->references('id')
                             ->on('tipo_membros')
                             ->onDelete('cascade');
 
-            $table->foreign('classeTelefones_id')
+            $table->foreign('classe_telefone_id')
                             ->references('id')
                             ->on('classe_telefones')
                             ->onDelete('cascade');
