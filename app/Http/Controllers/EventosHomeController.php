@@ -35,6 +35,10 @@ class EventosHomeController extends Controller
     public function destroy($id)
     {
         $eventosHome = EventosHome::findOrFail($id);
+        $filePath = public_path() . $eventosHome->imagem;
+        if(file_exists($filePath)){
+            unlink($filePath);
+        }
         $eventosHome->delete();
         return response()->json(['message' => 'removido com sucesso']);
     }
