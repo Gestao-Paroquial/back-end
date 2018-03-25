@@ -25,3 +25,6 @@ Homestead.json
 
 
 # End of https://www.gitignore.io/api/laravel
+
+
+service-account-credentials.json

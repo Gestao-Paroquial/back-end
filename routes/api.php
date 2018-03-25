@@ -23,6 +23,8 @@ Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('user', 'UsersController');
 
+Route::get('analytics', 'AnalyticsController@getData');
+
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('recover', 'AuthController@recover');
