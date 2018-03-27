@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePastoraisTable extends Migration
+class CreateMembrosComunidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreatePastoraisTable extends Migration
      */
     public function up()
     {
-        Schema::create('pastorais', function (Blueprint $table) {
+        Schema::create('membros_comunidades', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('comunidade_id')->unsigned();
-            $table->integer('classe_telefone_id')->unsigned();
-            $table->string('nome',100);
-            $table->string('descricao',255);            
+            $table->integer('membro_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('comunidade_id')
@@ -26,11 +24,10 @@ class CreatePastoraisTable extends Migration
                             ->on('comunidades')
                             ->onDelete('cascade');
 
-            $table->foreign('classe_telefone_id')
+            $table->foreign('membro_id')
                             ->references('id')
-                            ->on('classe_telefones')
+                            ->on('membros')
                             ->onDelete('cascade');
-
         });
     }
 
@@ -41,6 +38,6 @@ class CreatePastoraisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pastorais');
+        Schema::dropIfExists('membros_comunidades');
     }
 }

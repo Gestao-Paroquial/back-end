@@ -18,6 +18,11 @@ class Comunidade extends Model
          
     }
 
+    public function membros()
+    {
+        return $this->hasManyThrough('App\Membro','App\MembrosComunidade','comunidade_id','id','id','membro_id');
+    }
+
     public function pastorais()
     {
         return $this->hasMany('App\pastorai','comunidade_id','id');

@@ -15,7 +15,6 @@ class CreateMembrosTable extends Migration
     {
         Schema::create('membros', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('comunidade_id')->unsigned();
             $table->integer('tipo_membro_id')->unsigned();
             $table->integer('classe_telefone_id')->unsigned();            
             $table->string('nome',100);
@@ -37,12 +36,6 @@ class CreateMembrosTable extends Migration
             $table->boolean('status');
             $table->timestamps();
 
-
-            
-            $table->foreign('comunidade_id')
-                            ->references('id')
-                            ->on('comunidades')
-                            ->onDelete('cascade');
 
             $table->foreign('tipo_membro_id')
                             ->references('id')
