@@ -13,7 +13,7 @@ class PastoraisController extends Controller
     {
        $ep = new Pastorai();
        
-       $result = $ep->with(['comunidade:id,nome','telefones:id,classe_telefone_id,id_entidade,telefone','membros:membros.id,nome'])->get();
+       $result = $ep->with(['comunidade:id,nome','telefones:id,classe_telefone_id,id_entidade,telefone','coordenador:id,nome','membros:membros.id,nome'])->get();
 
         return $result; 
 
@@ -23,7 +23,7 @@ class PastoraisController extends Controller
     {
         $ep = new Pastorai();
         
-        $result = $ep->with(['comunidade:id,nome','telefones:id,classe_telefone_id,id_entidade,telefone','membros:membros.id,nome'])->where('id', $id)->first();
+        $result = $ep->with(['comunidade:id,nome','telefones:id,classe_telefone_id,id_entidade,telefone','coordenador:id,nome','membros:membros.id,nome'])->where('id', $id)->first();
 
         return $result; 
         // return response()->json($pastorai);

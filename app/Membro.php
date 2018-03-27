@@ -27,9 +27,9 @@ class Membro extends Model
         return $this->hasMany('App\Dizimo')->orderBy('mes','ano');
     }
 
-    public function comunidade()
+    public function comunidades()
     {
-        return $this->belongsTo(Comunidade::class);
+        return $this->hasManyThrough('App\Comunidade','App\MembrosComunidade','membro_id','id','id','comunidade_id');
     }
 
     public function pastorais()
