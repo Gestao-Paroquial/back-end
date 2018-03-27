@@ -23,7 +23,7 @@ Route::resource('dizimos', 'DizimosController');
 Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('user', 'UsersController');
-Route::resource('tipoMembro', 'TipoMembroController');
+Route::resource('tiposMembro', 'TipoMembroController');
 
 Route::get('analytics', 'AnalyticsController@getData');
 
