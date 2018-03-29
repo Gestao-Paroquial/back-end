@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Membro;
+use App\Telefone;
 use Illuminate\Http\Request;
 
 class MembrosController extends Controller
@@ -22,7 +23,15 @@ class MembrosController extends Controller
     }
     public function store(Request $request){
         $membro = membro::create($request->all());
-        return response()->json($membro);
+        $telefones = $request->telefones;
+        foreach ($telefones as $telefone) {
+             $telefone["id_entidade"] = $membro->id;
+             $telefone["classe_telefone_id"] = $membro->classe_telefone_id;
+             
+             $telefone = new Telefone($telefone);
+             $telefone->save();
+            }
+        return response()->json($telefones);
     }
     public function update(Request $request, $id){
         $membro = membro::findOrFail($id);
