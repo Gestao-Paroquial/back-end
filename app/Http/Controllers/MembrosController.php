@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Membro;
 use App\Telefone;
+use App\Dependente;
 use Illuminate\Http\Request;
 
 class MembrosController extends Controller
@@ -23,15 +24,21 @@ class MembrosController extends Controller
     }
     public function store(Request $request){
         $membro = membro::create($request->all());
+        
         $telefones = $request->telefones;
         foreach ($telefones as $telefone) {
              $telefone["id_entidade"] = $membro->id;
              $telefone["classe_telefone_id"] = $membro->classe_telefone_id;
              
-             $telefone = new Telefone($telefone);
-             $telefone->save();
+             Telefone::create($telefone);
             }
-        return response()->json($telefones);
+        
+        $dependentes = $request->dependentes;
+        foreach ($dependentes as $dependente) {
+             $dependente["membro_id"] = $membro->id;             
+             Dependente::create($dependente);
+            }
+        return response()->json(['message'=>'Membro '.$membro->nome.' adicionado com sucesso']);
     }
     public function update(Request $request, $id){
         $membro = membro::findOrFail($id);
