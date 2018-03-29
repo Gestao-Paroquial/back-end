@@ -28,16 +28,16 @@ class MembrosController extends Controller
         $telefones = $request->telefones;
         foreach ($telefones as $telefone) {
              $telefone["id_entidade"] = $membro->id;
-             $telefone["classe_telefone_id"] = $membro->classe_telefone_id;
-             
+             $telefone["classe_telefone_id"] = $membro->classe_telefone_id;             
              Telefone::create($telefone);
-            }
+        }
         
         $dependentes = $request->dependentes;
         foreach ($dependentes as $dependente) {
              $dependente["membro_id"] = $membro->id;             
              Dependente::create($dependente);
-            }
+        }
+        
         return response()->json(['message'=>'Membro '.$membro->nome.' adicionado com sucesso']);
     }
     public function update(Request $request, $id){
