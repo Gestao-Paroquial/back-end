@@ -24,6 +24,7 @@ Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('user', 'UsersController');
 Route::resource('tiposMembro', 'TipoMembroController');
+Route::resource('tiposDependente', 'TipoDependenteController');
 
 Route::get('analytics', 'AnalyticsController@getData');
 
