@@ -10,20 +10,20 @@ use Illuminate\Http\Request;
 class MembrosController extends Controller
 {
      public function index(){
-        $membro = new membro();
+        $membro = new Membro();
 
         $result = $membro->with(['telefones:id,classe_telefone_id,id_entidade,telefone','dependentes','dizimos','comunidades:comunidades.id,comunidades.nome','pastorais:pastorais.id,nome'])->get();
         
         return $result;
     }
     public function show($id){
-        $membro = new membro();
+        $membro = new Membro();
         
         $result = $membro->with(['telefones:id,classe_telefone_id,id_entidade,telefone','dependentes','dizimos','comunidades:comunidades.id,comunidades.nome','pastorais:pastorais.id,nome'])->where('id', $id)->first();
         return $result;
     }
     public function store(Request $request){
-        $membro = membro::create($request->all());
+        $membro = Membro::create($request->all());
         
         $telefones = $request->telefones;
         foreach ($telefones as $telefone) {
