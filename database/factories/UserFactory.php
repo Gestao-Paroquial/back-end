@@ -18,7 +18,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
     return [
         'name' => 'Padre',
-        'email' => $faker->unique()->safeEmail,
+        'email' => 'admin@admin.com',
         'password' => Hash::make('1234'),
         'is_verified' => true,
     ];
