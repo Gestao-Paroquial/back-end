@@ -25,7 +25,7 @@ class Comunidade extends Model
 
     public function pastorais()
     {
-        return $this->hasMany('App\pastorai','comunidade_id','id');
+        return $this->hasMany('App\Pastorai','comunidade_id','id');
     }
 
     public function doacoes()
