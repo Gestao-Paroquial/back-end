@@ -26,6 +26,8 @@ Route::resource('user', 'UsersController');
 Route::resource('tiposMembro', 'TipoMembroController');
 Route::resource('tiposEvento', 'TipoEventoController');
 Route::resource('tiposDependente', 'TipoDependenteController');
+Route::resource('dependentes', 'DependenteController');
+Route::resource('telefones', 'TelefoneController');
 
 Route::get('analytics', 'AnalyticsController@getData');
 
