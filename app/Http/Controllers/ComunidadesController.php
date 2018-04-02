@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Comunidade;
+use App\Telefone;
 use Illuminate\Http\Request;
 
 class ComunidadesController extends Controller
@@ -20,6 +21,11 @@ class ComunidadesController extends Controller
     }
     public function store(Request $request){
         $comunidade = Comunidade::create($request->all());
+        foreach ($request->telefones as $telefone) {
+            $telefone["id_entidade"] = $comunidade->id;
+            $telefone["classe_telefone_id"] = $comunidade->classe_telefone_id;             
+            Telefone::create($telefone);
+       }
         return response()->json(['message'=> $comunidade->nome . ' adicionada com sucesso']);
     }
     public function update(Request $request, $id){
