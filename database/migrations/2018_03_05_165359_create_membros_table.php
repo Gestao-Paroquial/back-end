@@ -19,7 +19,7 @@ class CreateMembrosTable extends Migration
             $table->integer('classe_telefone_id')->unsigned();            
             $table->string('nome',100);
             $table->string('email',100);
-            $table->datetime('data_Nascimento')->nullable();
+            $table->date('data_Nascimento')->nullable();
             $table->string('nome_Pai',100)->nullable();
             $table->string('nome_Mae',100)->nullable();
             $table->boolean('estado_Civil')->nullable();
