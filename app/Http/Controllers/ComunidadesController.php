@@ -32,6 +32,18 @@ class ComunidadesController extends Controller
         $comunidade = Comunidade::findOrFail($id);
         $comunidade->fill($request->all());
         $comunidade->save();
+        foreach ($request->telefones as $telefone) {
+            if(!isset($telefone["id"])){
+                $telefone["id_entidade"] = $comunidade->id;
+                $telefone["classe_telefone_id"] = $comunidade->classe_telefone_id;             
+                Telefone::create($telefone);
+            }else {
+               $modelTelefone =  Telefone::findOrFail($telefone["id"]);
+                $modelTelefone->fill($telefone);
+                $modelTelefone->save();
+            }
+       }
+       
         return response()->json(['message'=> $comunidade->nome . ' alterada com sucesso']);
     }
     public function destroy($id){
