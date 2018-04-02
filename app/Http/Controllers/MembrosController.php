@@ -54,6 +54,29 @@ class MembrosController extends Controller
         $membro = membro::findOrFail($id);
         $membro->fill($request->all());
         $membro->save();
+
+        foreach ($request->telefones as $telefone) {
+            if(!isset($telefone["id"])){
+                $telefone["id_entidade"] = $membro->id;
+                $telefone["classe_telefone_id"] = $membro->classe_telefone_id;             
+                Telefone::create($telefone);
+            }else {
+               $modelTelefone =  Telefone::findOrFail($telefone["id"]);
+                $modelTelefone->fill($telefone);
+                $modelTelefone->save();
+            }
+       }
+       
+       foreach ($request->dependentes as $dependente) {
+        if(!isset($dependente["id"])){
+            $dependente["membro_id"] = $membro->id;             
+            Dependente::create($dependente);
+        }  else {
+            $modelDependente = Dependente::findOrFail($dependente["id"]);
+            $modelDependente->fill($dependente);
+            $modelDependente->save();
+        }
+       }
         return response()->json(['message'=> $membro->nome.' alterado com sucesso']);
     }
     public function destroy($id){
