@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MembrosPastorai extends Model
 {
     protected $fillable = [
-        'id','pastorais_id','membros_id'
-    ];
-
-    
+        'id','pastorai_id','membro_id'
+    ];  
     
 }
