@@ -8,9 +8,12 @@ class Comunidade extends Model
 {
      protected $fillable = [
         'id', 'nome', 'email' ,'cnpj' , 'endereco', 'nro', 'compl',
-        'bairro', 'cidade', 'uf', 'cep',
+        'bairro', 'cidade', 'uf', 'cep', 'classe_telefone_id'
     ];
     
+    protected $attributes = [
+        'classe_telefone_id' => 1,
+    ];
 
     public function telefones()
     {

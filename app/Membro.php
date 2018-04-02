@@ -10,6 +10,10 @@ class Membro extends Model
         'nome', 'email', 'data_Nascimento', 'nome_Pai', 'nome_Mae', 'estado_Civil', 'batizado', 'crismado', '1_eucaristia', 'endereco', 'nro', 'compl', 'bairro', 'cidade', 'uf', 'cep', 'status', 'tipo_membro_id', 'classe_telefone_id'
     ];
 
+    protected $attributes = [
+        'classe_telefone_id' => 3,
+    ];
+
     public function telefones()
     {
          return $this->hasMany('App\Telefone','id_entidade','id')->where('classe_telefone_id','3');
