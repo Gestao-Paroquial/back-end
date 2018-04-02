@@ -21,3 +21,20 @@
        php artisan db:seed
     
        php artisan serve  
+
+
+## DOCKER
+
+docker run --rm --interactive --tty \
+    --volume $PWD:/app \
+    composer install
+
+docker-compose up -d --build
+
+docker-compose exec app chown -R www-data:www-data /var/www
+
+docker-compose exec app php artisan migrate
+
+docker-compose exec app php artisan db:seed
+
+sudo chown -R 33 ./*
