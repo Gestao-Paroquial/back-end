@@ -38,6 +38,6 @@ class DependenteController extends Controller
     {
         $dependente = Dependente::findOrFail($id);
         $dependente->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=> 'Dependente '.$dependente->nome.' removido com sucesso']);
     }
 }

@@ -38,6 +38,6 @@ class TelefoneController extends Controller
     {
         $telefone = Telefone::findOrFail($id);
         $telefone->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=>'Telefone '.$telefone->telefone.' removido com sucesso']);
     }
 }

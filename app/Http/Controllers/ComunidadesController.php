@@ -20,17 +20,17 @@ class ComunidadesController extends Controller
     }
     public function store(Request $request){
         $comunidade = Comunidade::create($request->all());
-        return response()->json($comunidade);
+        return response()->json(['message'=> $comunidade->nome . ' adicionada com sucesso']);
     }
     public function update(Request $request, $id){
         $comunidade = Comunidade::findOrFail($id);
         $comunidade->fill($request->all());
         $comunidade->save();
-        return response()->json($comunidade);
+        return response()->json(['message'=> $comunidade->nome . ' alterada com sucesso']);
     }
     public function destroy($id){
         $comunidade = Comunidade::findOrFail($id);
         $comunidade->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=> $comunidade->nome . ' removida com sucesso']);
     }
 }
