@@ -48,17 +48,17 @@ class MembrosController extends Controller
             MembrosPastorai::create($pastoral);
         }
 
-        return response()->json(['message'=>'Membro '.$membro->nome.' adicionado com sucesso']);
+        return response()->json(['message'=> $membro->nome.' adicionado com sucesso']);
     }
     public function update(Request $request, $id){
         $membro = membro::findOrFail($id);
         $membro->fill($request->all());
         $membro->save();
-        return response()->json(['message'=>'Membro '.$membro->nome.' alterado com sucesso']);
+        return response()->json(['message'=> $membro->nome.' alterado com sucesso']);
     }
     public function destroy($id){
         $membro = membro::findOrFail($id);
         $membro->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=> $membro->nome.' removido com sucesso']);
     }
 }
