@@ -54,7 +54,7 @@ class MembrosController extends Controller
         $membro = membro::findOrFail($id);
         $membro->fill($request->all());
         $membro->save();
-        return response()->json($membro);
+        return response()->json(['message'=>'Membro '.$membro->nome.' alterado com sucesso']);
     }
     public function destroy($id){
         $membro = membro::findOrFail($id);
