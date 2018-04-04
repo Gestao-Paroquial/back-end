@@ -18,7 +18,7 @@ class CreateAgendasTable extends Migration
             $table->integer('comunidade_id')->unsigned();
             $table->integer('tipo_evento_id')->unsigned();
             $table->datetime('data_inicio_evento');
-            $table->datetime('data_fim_evento');
+            $table->datetime('data_fim_evento')->nullable();
             $table->string('titulo');
             $table->string('descricao');            
             $table->timestamps();
