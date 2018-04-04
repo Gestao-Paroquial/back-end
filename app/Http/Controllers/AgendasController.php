@@ -21,17 +21,20 @@ class AgendasController extends Controller
     }
     public function store(Request $request){
         $agenda = Agenda::create($request->all());
-        return response()->json($agenda);
+
+        return response()->json(['message'=> $agenda->titulo.' adicionado com sucesso']);
     }
     public function update(Request $request, $id){
         $agenda = Agenda::findOrFail($id);
         $agenda->fill($request->all());
         $agenda->save();
-        return response()->json($agenda);
+        
+        return response()->json(['message'=> $agenda->titulo.' alterado com sucesso']);
     }
     public function destroy($id){
         $agenda = Agenda::findOrFail($id);
         $agenda->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        
+        return response()->json(['message'=> $agenda->titulo.' removido com sucesso']);
     }
 }
