@@ -16,7 +16,7 @@ class AgendasController extends Controller
     public function show($id){
         $agenda = new Agenda();
         
-        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva','batismo:id,agenda_id,nomeBatizando,dataNascimento'])->where('id', $id)->first();
+        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva','batismo:id,agenda_id,nomeBatizando,dataNascimento', 'comunidade:id,nome', 'tipoEvento:id,descricao'])->where('id', $id)->first();
         return $result;
     }
     public function store(Request $request){

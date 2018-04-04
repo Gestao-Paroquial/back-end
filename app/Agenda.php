@@ -20,5 +20,14 @@ class Agenda extends Model
     {
         return $this->hasMany('App\Batismo');
     }  
+
+    public function comunidade()
+    {
+        return $this->belongsTo(Comunidade::class);
+    }
     
+    public function tipoEvento()
+    {
+        return $this->belongsTo(TipoEvento::class);
+    }
 }
