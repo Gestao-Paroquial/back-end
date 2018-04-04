@@ -23,6 +23,7 @@ Route::resource('dizimos', 'DizimosController');
 Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('user', 'UsersController');
+Route::resource('tipos', 'TiposController');
 Route::resource('tiposMembro', 'TipoMembroController');
 Route::resource('tiposEvento', 'TipoEventoController');
 Route::resource('tiposDependente', 'TipoDependenteController');
