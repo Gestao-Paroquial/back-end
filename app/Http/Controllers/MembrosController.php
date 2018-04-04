@@ -61,7 +61,7 @@ class MembrosController extends Controller
                 $telefone["classe_telefone_id"] = $membro->classe_telefone_id;             
                 Telefone::create($telefone);
             }else {
-               $modelTelefone =  Telefone::findOrFail($telefone["id"]);
+                $modelTelefone =  Telefone::findOrFail($telefone["id"]);
                 $modelTelefone->fill($telefone);
                 $modelTelefone->save();
             }

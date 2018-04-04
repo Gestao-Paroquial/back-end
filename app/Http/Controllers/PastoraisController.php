@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pastorai;
 
+use App\Telefone;
+use App\Pastorai;
 use App\Comunidade;
 
 class PastoraisController extends Controller
@@ -25,14 +26,20 @@ class PastoraisController extends Controller
         
         $result = $ep->with(['comunidade:id,nome','telefones:id,classe_telefone_id,id_entidade,telefone','coordenador:id,nome','membros:membros.id,nome'])->where('id', $id)->first();
 
-        return $result; 
-        // return response()->json($pastorai);
+        return $result;      
     }
 
     public function store(Request $request)
     {
         $pastorai = Pastorai::create($request->all());        
-        return response()->json($pastorai);
+
+        foreach ($request->telefones as $telefone) {
+            $telefone["id_entidade"] = $pastorai->id;
+            $telefone["classe_telefone_id"] = $pastorai->classe_telefone_id;             
+            Telefone::create($telefone);
+       }
+
+       return response()->json(['message'=> $pastorai->nome . ' adicionada com sucesso']);
     }
 
     public function update(Request $request, $id)
@@ -40,13 +47,26 @@ class PastoraisController extends Controller
         $pastorai = Pastorai::findOrFail($id);
         $pastorai->fill($request->all());
         $pastorai->save();
-        return response()->json($pastorai);
+
+        foreach ($request->telefones as $telefone) {
+            if(!isset($telefone["id"])){
+                $telefone["id_entidade"] = $pastorai->id;
+                $telefone["classe_telefone_id"] = $pastorai->classe_telefone_id;             
+                Telefone::create($telefone);
+            }else {
+                $modelTelefone =  Telefone::findOrFail($telefone["id"]);
+                $modelTelefone->fill($telefone);
+                $modelTelefone->save();
+            }
+       }
+       
+        return response()->json(['message'=> $pastorai->nome.' alterado com sucesso']);
     }
 
     public function destroy($id)
     {
         $pastorai = Pastorai::findOrFail($id);
         $pastorai->delete();
-        return response()->json(['message'=>'pastoral removida com sucesso']);
+        return response()->json(['message'=> $pastorai->nome.' removida com sucesso']);
     }
 }
