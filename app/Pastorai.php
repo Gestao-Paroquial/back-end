@@ -10,6 +10,10 @@ class Pastorai extends Model
         'id', 'comunidade_id','nome', 'descricao', 'classe_telefone_id','coordenador_id',
     ];
 
+    protected $attributes = [
+        'classe_telefone_id' => 2,
+    ];
+
     public function comunidade()
     {
         return $this->belongsTo(Comunidade::class);
