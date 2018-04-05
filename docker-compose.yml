@@ -22,7 +22,11 @@ services:
     volumes_from:
       - app
     ports:
+<<<<<<< HEAD
       - 8080:80
+=======
+      - 8000:80
+>>>>>>> alteracoes-ocimar
 
   # The Database
   database:

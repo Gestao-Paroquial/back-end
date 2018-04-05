@@ -2,13 +2,12 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Comunidades::class, function (Faker $faker) {
+$factory->define(App\Comunidade::class, function (Faker $faker) {
 	return [
+		'classe_telefone_id' => 1,
 		'nome' 		=> 'comunidade teste',
 		'email' 	=> $faker->unique()->safeEmail,
 		'cnpj' 		=> '111111111000110',
-		'telefone' 	=> '1122223333',
-		'celular' 	=> '11999998888',
 		'endereco' 	=> 'rua são paulo',
 		'nro' 		=> '100',
 		'compl' 	=> 'sala 1',

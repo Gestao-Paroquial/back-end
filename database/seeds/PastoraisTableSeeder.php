@@ -11,6 +11,6 @@ class PastoraisTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Pastorais::class, 20)->create();
+        factory(App\Pastorai::class, 20)->create();
     }
 }

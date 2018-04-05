@@ -20,6 +20,7 @@ class CreateMensagemParocosTable extends Migration
             $table->mediumText('mensagem'); 
             $table->string('link',200)->nullable(); 
             $table->timestamps();
+            
         });
     }
 

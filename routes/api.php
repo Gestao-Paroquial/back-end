@@ -14,14 +14,21 @@ use Illuminate\Http\Request;
 */
 
 Route::post('uploadImagem', ['uses' => 'ImagesController@save']);
-Route::resource('note', 'NoteController');
-Route::resource('pastorais', 'PastoraisController');
+Route::resource('agenda', 'AgendasController');
+Route::resource('atas', 'AtasController');
+Route::resource('batismos', 'BatismosController');
+Route::resource('casamentos', 'CasamentosController');
 Route::resource('comunidades', 'ComunidadesController');
-Route::resource('visitantes', 'VisitantesController');
-Route::resource('membrosPastorais', 'MembrosPastoraisController');
-Route::resource('mensagensParoco', 'MensagensParocoController');
+Route::resource('dizimos', 'DizimosController');
+Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('user', 'UsersController');
+Route::resource('tipos', 'TiposController');
+Route::resource('tiposMembro', 'TipoMembroController');
+Route::resource('tiposEvento', 'TipoEventoController');
+Route::resource('tiposDependente', 'TipoDependenteController');
+Route::resource('dependentes', 'DependenteController');
+Route::resource('telefones', 'TelefoneController');
 
 Route::get('analytics', 'AnalyticsController@getData');
 
@@ -38,3 +45,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
         return response()->json(['success'=>true]);
     });
 });
+Route::resource('membros', 'MembrosController');
+Route::resource('mensagensParoco', 'MensagensParocoController');
+Route::resource('note', 'NoteController');
+Route::resource('pastorais', 'PastoraisController');
