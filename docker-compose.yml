@@ -23,10 +23,14 @@ services:
       - app
     ports:
 <<<<<<< HEAD
+<<<<<<< HEAD
       - 8080:80
 =======
       - 8000:80
 >>>>>>> alteracoes-ocimar
+=======
+      - 8000:80
+>>>>>>> 0694d71681fb4e8bf61037b4903a9d37bbdbf8ea
 
   # The Database
   database:
