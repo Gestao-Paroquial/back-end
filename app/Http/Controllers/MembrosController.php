@@ -84,4 +84,14 @@ class MembrosController extends Controller
         $membro->delete();
         return response()->json(['message'=> $membro->nome.' removido com sucesso']);
     }
+
+    public function aniversariantesDoMes($month)
+    {
+        $membros = new Membro();
+        
+        $result = $membros 
+                    ->whereMonth('data_Nascimento', '=', $month)
+                    ->get();
+        return $result;
+    }
 }

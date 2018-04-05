@@ -46,6 +46,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     });
 });
 Route::resource('membros', 'MembrosController');
+Route::get('aniversariantes/{month}', 'MembrosController@aniversariantesDoMes');
 Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
