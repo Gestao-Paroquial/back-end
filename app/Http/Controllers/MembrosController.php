@@ -11,17 +11,19 @@ use Illuminate\Http\Request;
 
 class MembrosController extends Controller
 {
+    public $with = ['telefones:id,classe_telefone_id,id_entidade,telefone','dependentes','dizimos','comunidades:comunidades.id,comunidades.nome','pastorais:pastorais.id,nome', 'tipoMembro:descricao,id'];
+
      public function index(){
         $membro = new Membro();
 
-        $result = $membro->with(['telefones:id,classe_telefone_id,id_entidade,telefone','dependentes','dizimos','comunidades:comunidades.id,comunidades.nome','pastorais:pastorais.id,nome'])->get();
+        $result = $membro->with($this->with)->get();
         
         return $result;
     }
     public function show($id){
         $membro = new Membro();
         
-        $result = $membro->with(['telefones:id,classe_telefone_id,id_entidade,telefone','dependentes','dizimos','comunidades:comunidades.id,comunidades.nome','pastorais:pastorais.id,nome'])->where('id', $id)->first();
+        $result = $membro->with($this->with)->where('id', $id)->first();
         return $result;
     }
     public function store(Request $request){

@@ -40,4 +40,9 @@ class Membro extends Model
     {
         return $this->hasManyThrough('App\Pastorai','App\MembrosPastorai','membro_id','id','id','pastorai_id');
     }
+
+    public function tipoMembro()
+    {
+        return $this->belongsTo(TipoMembro::class);
+    }
 }
