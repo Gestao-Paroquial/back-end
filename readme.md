@@ -6,6 +6,8 @@
        git clone https://github.com/Gestao-Paroquial/back-end.git
     
        cd back-end
+
+       sudo chmod -R 777 public/uploads/
     
        composer install
        
