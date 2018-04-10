@@ -19,6 +19,7 @@ class CreatePagamentosTable extends Migration
             $table->integer('tipo_pagamento_id')->unsigned();
             $table->datetime('data_Pagamento');
             $table->decimal('valor');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('agenda_id')

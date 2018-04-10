@@ -27,3 +27,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('add', ['uses' => 'UsersController@post']);
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

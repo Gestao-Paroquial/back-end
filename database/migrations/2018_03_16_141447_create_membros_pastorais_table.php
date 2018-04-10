@@ -17,6 +17,7 @@ class CreateMembrosPastoraisTable extends Migration
             $table->increments('id');
             $table->integer('pastorai_id')->unsigned();
             $table->integer('membro_id')->unsigned();
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('pastorai_id')

@@ -20,6 +20,7 @@ class CreateAtasTable extends Migration
             $table->string('descricao');
             $table->decimal('totalGastos')->nullable();
             $table->decimal('totalArrecadacoes')->nullable();
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('comunidade_id')

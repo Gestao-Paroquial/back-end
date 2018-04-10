@@ -19,6 +19,7 @@ class CreateMensagemParocosTable extends Migration
             $table->string('subtitulo',100);  
             $table->mediumText('mensagem'); 
             $table->string('link',200)->nullable(); 
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
             
         });

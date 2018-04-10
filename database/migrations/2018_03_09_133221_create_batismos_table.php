@@ -19,6 +19,7 @@ class CreateBatismosTable extends Migration
             $table->integer('classe_telefone_id')->unsigned();
             $table->string('nomeBatizando');
             $table->datetime('dataNascimento');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('agenda_id')

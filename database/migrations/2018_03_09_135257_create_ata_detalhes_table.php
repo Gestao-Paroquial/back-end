@@ -19,6 +19,7 @@ class CreateAtaDetalhesTable extends Migration
             $table->integer('tipo_lancamento_id')->unsigned();
             $table->string('descricao');
             $table->decimal('valor');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('ata_id')

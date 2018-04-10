@@ -22,6 +22,8 @@ class MembrosController extends Controller
     }
     public function store(Request $request){
         $membro = membro::create($request->all());
+
+        $membro->telefones()->save();
         return response()->json($membro);
     }
     public function update(Request $request, $id){
