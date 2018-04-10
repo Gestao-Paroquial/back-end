@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTipoLancamentosTable extends Migration
+class CreateTipoEstadoCivisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTipoLancamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_lancamentos', function (Blueprint $table) {
+        Schema::create('tipo_estado_civis', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao');
             $table->boolean('excluido')->default(false);
@@ -28,6 +28,6 @@ class CreateTipoLancamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_lancamentos');
+        Schema::dropIfExists('tipo_estado_civis');
     }
 }

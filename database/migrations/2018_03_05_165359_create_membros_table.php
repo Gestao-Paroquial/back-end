@@ -16,13 +16,13 @@ class CreateMembrosTable extends Migration
         Schema::create('membros', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tipo_membro_id')->unsigned();
-            $table->integer('classe_telefone_id')->unsigned();            
+            $table->integer('classe_telefone_id')->unsigned(); 
+            $table->integer('tipo_estado_civi_id')->unsigned();           
             $table->string('nome',100);
             $table->string('email',100);
             $table->date('data_Nascimento')->nullable();
             $table->string('nome_Pai',100)->nullable();
             $table->string('nome_Mae',100)->nullable();
-            $table->boolean('estado_Civil')->nullable();
             $table->boolean('batizado')->nullable();
             $table->boolean('crismado')->nullable();
             $table->boolean('1_eucaristia')->nullable();
@@ -34,6 +34,7 @@ class CreateMembrosTable extends Migration
             $table->string('uf',2)->nullable();
             $table->string('cep',9)->nullable();
             $table->boolean('status');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
 
@@ -46,6 +47,11 @@ class CreateMembrosTable extends Migration
                             ->references('id')
                             ->on('classe_telefones')
                             ->onDelete('cascade');
+            $table->foreign('tipo_estado_civi_id')
+                            ->references('id')
+                            ->on('tipo_estado_civis')
+                            ->onDelete('cascade');
+
 
         });
     }

@@ -21,6 +21,7 @@ class CreateCasamentosTable extends Migration
             $table->datetime('dataNascNoivo');
             $table->string('nomeNoiva');
             $table->datetime('dataNascNoiva');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
 

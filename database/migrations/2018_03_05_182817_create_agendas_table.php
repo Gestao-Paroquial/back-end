@@ -20,7 +20,9 @@ class CreateAgendasTable extends Migration
             $table->datetime('data_inicio_evento');
             $table->datetime('data_fim_evento')->nullable();
             $table->string('titulo');
-            $table->string('descricao');            
+            $table->string('descricao'); 
+            $table->boolean('status')->default(true);   
+            $table->boolean('excluido')->default(false);        
             $table->timestamps();
 
             $table->foreign('tipo_evento_id')

@@ -18,8 +18,8 @@ class CreateDependentesTable extends Migration
             $table->integer('membro_id')->unsigned();
             $table->integer('tipo_dependente_id')->unsigned();
             $table->string('nome',100);
-            $table->date('data_Nascimento');
-
+            $table->datetime('data_Nascimento');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('membro_id')

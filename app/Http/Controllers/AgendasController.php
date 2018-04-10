@@ -4,22 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Agenda;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class AgendasController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $agenda = new Agenda();
 
-        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva', 'batismo:id,agenda_id,nomeBatizando,dataNascimento'])->get();
+        
+        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva','batismo:id,agenda_id,nomeBatizando,dataNascimento'])->get();
+
         return $result;
     }
     public function show($id)
     {
         $agenda = new Agenda();
-
-        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva', 'batismo:id,agenda_id,nomeBatizando,dataNascimento', 'comunidade:id,nome', 'tipoEvento:id,descricao'])->where('id', $id)->first();
+        
+        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva','batismo:id,agenda_id,nomeBatizando,dataNascimento'])->where('id', $id)->first();
+        
         return $result;
     }
     public function store(Request $request)

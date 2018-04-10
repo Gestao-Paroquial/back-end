@@ -19,6 +19,7 @@ class CreateDizimosTable extends Migration
             $table->string('mes',2);
             $table->string('ano',4);
             $table->decimal('valor');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('membro_id')
