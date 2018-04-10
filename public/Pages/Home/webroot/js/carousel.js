@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $.get("http://192.168.123.87/api/eventosHome", {}, (carousel) => {
+    $.get("http://paroquiasle.org.br/api/eventosHome", {}, (carousel) => {
 
         if (carousel) {
             let carousel_inner = document.querySelector('.carousel-inner');
@@ -15,7 +15,7 @@ $(document).ready(() => {
 });
 
 function carouselItemView(item) {
-    const imagem = `http://192.168.123.87${item.imagem}`;
+    const imagem = `http://paroquiasle.org.br${item.imagem}`;
     return `
     <div class="carousel-item">
         <a href="${item.destino}" target="_blank">
