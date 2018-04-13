@@ -1,0 +1,16 @@
+language: php
+php:
+- 7.2
+addons:
+  ssh_known_hosts: 165.227.197.233
+script:
+- bash ./scripts/script.sh
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: bash ./scripts/deploy.sh
+  on:
+    branch: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_2bbbd9fa9ec2_key -iv $encrypted_2bbbd9fa9ec2_iv
+  -in deploy.enc -out /tmp/deploy -d
