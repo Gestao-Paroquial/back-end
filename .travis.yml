@@ -8,7 +8,7 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: echo ./scripts/deploy.sh
+  script: bash ./scripts/deploy.sh
   on:
     branch: master
 before_install:
