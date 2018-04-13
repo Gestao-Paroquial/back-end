@@ -79,6 +79,21 @@ class MembrosController extends Controller
             $modelDependente->save();
         }
        }
+
+       foreach ($request->comunidades as $comunidade) {
+        if(!isset($comunidade["id"])){
+            $comunidade["membro_id"] = $membro->id;             
+            MembrosComunidade::create($comunidade);
+        }
+        }
+    
+        foreach ($request->pastorais as $pastoral) {
+        if(!isset($pastoral["id"])){
+            $pastoral["membro_id"] = $membro->id;             
+            MembrosPastorai::create($pastoral);
+        }
+        }
+
         return response()->json(['message'=> $membro->nome.' alterado com sucesso']);
     }
     public function destroy($id){
