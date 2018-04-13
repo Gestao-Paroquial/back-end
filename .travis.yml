@@ -4,7 +4,7 @@ php:
 addons:
   ssh_known_hosts: 165.227.197.233
 script:
-- bash ./scripts/script.sh
+- echo "teste"
 deploy:
   provider: script
   skip_cleanup: true
@@ -13,4 +13,4 @@ deploy:
     branch: master
 before_install:
 - openssl aes-256-cbc -K $encrypted_f0ca5aa8b9d3_key -iv $encrypted_f0ca5aa8b9d3_iv
-  -in deploy.enc -out deploy -d
+  -in deploy.enc -out /tmp/deploy -d
