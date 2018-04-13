@@ -16,7 +16,7 @@ class MensagensParocoController extends Controller
     public function store(Request $request)
     {
         $mensagensParoco = MensagensParoco::create($request->all());
-        return response()->json($mensagensParoco);
+        return response()->json(['message'=>'Adicionado com sucesso']);
     }
 
 
@@ -31,13 +31,13 @@ class MensagensParocoController extends Controller
         $mensagensParoco = MensagensParoco::findOrFail($id);
         $mensagensParoco->fill($request->all());
         $mensagensParoco->save();
-        return response()->json($mensagensParoco);
+        return response()->json(['message'=>'Alterado com sucesso']);
     }
     
     public function destroy($id)
     {
         $mensagensParoco = MensagensParoco::findOrFail($id);
         $mensagensParoco->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=>'Removido com sucesso']);
     }
 }
