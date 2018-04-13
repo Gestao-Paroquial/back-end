@@ -16,7 +16,7 @@ class TipoEventoController extends Controller
     public function store(Request $request)
     {
         $tipoEvento = TipoEvento::create($request->all());
-        return response()->json($tipoEvento);
+        return response()->json(['message'=>'Adicionado com sucesso']);
     }
 
 
@@ -31,13 +31,13 @@ class TipoEventoController extends Controller
         $tipoEvento = TipoEvento::findOrFail($id);
         $tipoEvento->fill($request->all());
         $tipoEvento->save();
-        return response()->json($tipoEvento);
+        return response()->json(['message'=>'Alterado com sucesso']);
     }
     
     public function destroy($id)
     {
         $tipoEvento = TipoEvento::findOrFail($id);
         $tipoEvento->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=>'Removido com sucesso']);
     }
 }

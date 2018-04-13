@@ -16,7 +16,7 @@ class TipoMembroController extends Controller
     public function store(Request $request)
     {
         $tipoMembro = TipoMembro::create($request->all());
-        return response()->json($tipoMembro);
+        return response()->json(['message'=>'Adicionado com sucesso']);
     }
 
 
@@ -31,13 +31,13 @@ class TipoMembroController extends Controller
         $tipoMembro = TipoMembro::findOrFail($id);
         $tipoMembro->fill($request->all());
         $tipoMembro->save();
-        return response()->json($tipoMembro);
+        return response()->json(['message'=>'Alterado com sucesso']);
     }
     
     public function destroy($id)
     {
         $tipoMembro = TipoMembro::findOrFail($id);
         $tipoMembro->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message'=>'Removido com sucesso']);
     }
 }
