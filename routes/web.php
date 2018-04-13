@@ -16,7 +16,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@postReset')->name('p
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return File::get(public_path() . '/index.html');
     });
     Route::get('foo', function () {
         return "método GET";
