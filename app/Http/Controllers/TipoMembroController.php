@@ -16,7 +16,7 @@ class TipoMembroController extends Controller
     public function store(Request $request)
     {
         $tipoMembro = TipoMembro::create($request->all());
-        return response()->json(['message'=>'Adicionado com sucesso']);
+        return response()->json(['message'=>'Adicionado com sucesso', "tipo"=>$tipoMembro]);
     }
 
 

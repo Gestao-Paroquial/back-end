@@ -16,7 +16,7 @@ class TipoDependenteController extends Controller
     public function store(Request $request)
     {
         $tipoDependente = TipoDependente::create($request->all());
-        return response()->json(['message'=>'Adicionado com sucesso']);
+        return response()->json(['message'=>'Adicionado com sucesso', "tipo"=>$tipoDependente]);
     }
 
 
