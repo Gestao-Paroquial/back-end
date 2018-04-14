@@ -28,72 +28,17 @@ class MembrosController extends Controller
     }
     public function store(Request $request){
         $membro = Membro::create($request->all());
-
-        foreach ($request->telefones as $telefone) {
-             $telefone["id_entidade"] = $membro->id;
-             $telefone["classe_telefone_id"] = $membro->classe_telefone_id;             
-             Telefone::create($telefone);
-        }
         
-        foreach ($request->dependentes as $dependente) {
-             $dependente["membro_id"] = $membro->id;             
-             Dependente::create($dependente);
-        }
-
-        foreach ($request->comunidades as $comunidade) {
-            $comunidade["membro_id"] = $membro->id;             
-            MembrosComunidade::create($comunidade);
-        }
-        
-        foreach ($request->pastorais as $pastoral) {
-            $pastoral["membro_id"] = $membro->id;             
-            MembrosPastorai::create($pastoral);
-        }
+        $this->salvarOuAlterarPropriedades($request, $membro);
 
         return response()->json(['message'=> $membro->nome.' adicionado com sucesso']);
     }
     public function update(Request $request, $id){
         $membro = membro::findOrFail($id);
         $membro->fill($request->all());
-        $membro->save();
+        $membro->save();  
         
-
-        foreach ($request->telefones as $telefone) {
-            if(!isset($telefone["id"])){
-                $telefone["id_entidade"] = $membro->id;
-                $telefone["classe_telefone_id"] = $membro->classe_telefone_id;             
-                Telefone::create($telefone);
-            }else {
-                $modelTelefone =  Telefone::findOrFail($telefone["id"]);
-                $modelTelefone->fill($telefone);
-                $modelTelefone->save();
-            }
-       }
-       
-       foreach ($request->dependentes as $dependente) {
-        if(!isset($dependente["id"])){
-            $dependente["membro_id"] = $membro->id;             
-            Dependente::create($dependente);
-        }  else {
-            $modelDependente = Dependente::findOrFail($dependente["id"]);
-            $modelDependente->fill($dependente);
-            $modelDependente->save();
-        }
-       }
-
-       foreach ($request->comunidades as $comunidade) {
-            if(!isset($comunidade["id"])){
-                $comunidade["membro_id"] = $membro->id;             
-                MembrosComunidade::create($comunidade);
-            }
-        }
-    
-        foreach ($request->pastorais as $pastoral) {
-            if(!isset($pastoral["id"])){
-                $pastoral["membro_id"] = $membro->id;             
-                MembrosPastorai::create($pastoral);
-            }
-        }
+        $this->salvarOuAlterarPropriedades($request, $membro);
 
         $getIds = function($item)
         {
@@ -120,7 +65,6 @@ class MembrosController extends Controller
         $membro->delete();
         return response()->json(['message'=> $membro->nome.' removido com sucesso']);
     }
-
     public function aniversariantesDoMes($month)
     {
         $membros = new Membro();
@@ -130,5 +74,51 @@ class MembrosController extends Controller
                     ->get();
         return $result;
     }
-    
+    public function salvarOuAlterarPropriedades($request, $membro){
+        $this->salvarOuAlterarTelefones($request->telefones, $membro);
+        $this->salvarOuAlterarDependentes($request->dependentes, $membro);
+        $this->salvarComunidades($request->comunidades, $membro);
+        $this->salvarPastorais($request->pastorais, $membro);  
+    }
+    public function salvarOuAlterarTelefones($telefones, $membro){
+        foreach ($telefones as $telefone) {
+            if(!isset($telefone["id"])){
+                $telefone["id_entidade"] = $membro->id;
+                $telefone["classe_telefone_id"] = $membro->classe_telefone_id;             
+                Telefone::create($telefone);
+            }else {
+                $modelTelefone =  Telefone::findOrFail($telefone["id"]);
+                $modelTelefone->fill($telefone);
+                $modelTelefone->save();
+            }
+       }
+    }
+    public function salvarOuAlterarDependentes($dependentes, $membro){
+        foreach ($dependentes as $dependente) {
+            if(!isset($dependente["id"])){
+                $dependente["membro_id"] = $membro->id;             
+                Dependente::create($dependente);
+            }  else {
+                $modelDependente = Dependente::findOrFail($dependente["id"]);
+                $modelDependente->fill($dependente);
+                $modelDependente->save();
+            }
+           }
+    }  
+    public function salvarPastorais($pastorais, $membro){
+        foreach ($pastorais as $pastoral) {
+            if(!isset($pastoral["id"])){
+                $pastoral["membro_id"] = $membro->id;             
+                MembrosPastorai::create($pastoral);
+            }
+        }
+    }
+    public function salvarComunidades($comunidades, $membro){
+        foreach ($comunidades as $comunidade) {
+            if(!isset($comunidade["id"])){
+                $comunidade["membro_id"] = $membro->id;             
+                MembrosComunidade::create($comunidade);
+            }
+        }
+    }
 }
