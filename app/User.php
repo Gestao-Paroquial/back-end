@@ -1,15 +1,16 @@
 <?php
 namespace App;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    
+
     protected $fillable = [
-        'name', 'email', 'password', 'is_verified'
+        'name', 'email', 'password', 'is_verified',
     ];
-    
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

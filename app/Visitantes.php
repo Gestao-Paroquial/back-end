@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Visitantes extends Model
 {
     protected $fillable = [
-        'comunidades_id','nome', 'email', 'telefone'
+        'comunidades_id', 'nome', 'email', 'telefone',
     ];
-
 
     public function comunidades()
     {

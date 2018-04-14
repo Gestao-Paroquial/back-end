@@ -36,7 +36,7 @@ class EventosHomeController extends Controller
     {
         $eventosHome = EventosHome::findOrFail($id);
         $filePath = public_path() . $eventosHome->imagem;
-        if(file_exists($filePath)){
+        if (file_exists($filePath)) {
             unlink($filePath);
         }
         $eventosHome->delete();

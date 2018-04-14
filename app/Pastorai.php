@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pastorai extends Model
 {
     protected $fillable = [
-        'id', 'comunidade_id','nome', 'descricao', 'classe_telefone_id','coordenador_id',
+        'id', 'comunidade_id', 'nome', 'descricao', 'classe_telefone_id', 'coordenador_id',
     ];
 
     protected $attributes = [
@@ -21,18 +21,18 @@ class Pastorai extends Model
 
     public function telefones()
     {
-         return $this->hasMany('App\Telefone','id_entidade','id')->where('classe_telefone_id','2');
-         
+        return $this->hasMany('App\Telefone', 'id_entidade', 'id')->where('classe_telefone_id', '2');
+
     }
 
     public function coordenador()
     {
-        return $this->hasOne('App\Membro','id','coordenador_id');
+        return $this->hasOne('App\Membro', 'id', 'coordenador_id');
     }
 
     public function membros()
     {
-        return $this->hasManyThrough('App\Membro','App\MembrosPastorai','pastorai_id','id','id','membro_id');
+        return $this->hasManyThrough('App\Membro', 'App\MembrosPastorai', 'pastorai_id', 'id', 'id', 'membro_id');
     }
-        
+
 }

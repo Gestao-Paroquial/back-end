@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class TelefoneController extends Controller
 {
-  
+
     public function index()
     {
         return response()->json(Telefone::all());
@@ -19,13 +19,12 @@ class TelefoneController extends Controller
         return response()->json($telefone);
     }
 
-
     public function show($id)
     {
         $telefone = Telefone::findOrFail($id);
         return response()->json($telefone);
     }
- 
+
     public function update(Request $request, $id)
     {
         $telefone = Telefone::findOrFail($id);
@@ -33,11 +32,11 @@ class TelefoneController extends Controller
         $telefone->save();
         return response()->json($telefone);
     }
-    
+
     public function destroy($id)
     {
         $telefone = Telefone::findOrFail($id);
         $telefone->delete();
-        return response()->json(['message'=>'Telefone '.$telefone->telefone.' removido com sucesso']);
+        return response()->json(['message' => 'Telefone ' . $telefone->telefone . ' removido com sucesso']);
     }
 }

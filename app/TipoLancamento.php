@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class TipoLancamento extends Model
 {
     protected $fillable = [
-       'id',  'descricao' 
+        'id', 'descricao',
     ];
 }

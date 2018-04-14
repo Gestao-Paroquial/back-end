@@ -7,31 +7,36 @@ use Illuminate\Http\Request;
 
 class AtasController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $Ata = new Ata();
 
         $result = $Ata->with('detalhes')->get();
         return $result;
     }
-    public function show($id){
+    public function show($id)
+    {
         $Ata = new Ata();
-        
+
         $result = $Ata->with('detalhes')->where('id', $id)->first();
         return $result;
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $Ata = Ata::create($request->all());
         return response()->json($Ata);
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $Ata = Ata::findOrFail($id);
         $Ata->fill($request->all());
         $Ata->save();
         return response()->json($Ata);
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $Ata = Ata::findOrFail($id);
         $Ata->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message' => 'removido com sucesso']);
     }
 }

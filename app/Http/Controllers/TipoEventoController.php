@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class TipoEventoController extends Controller
 {
-  
+
     public function index()
     {
         return response()->json(TipoEvento::all());
@@ -16,28 +16,27 @@ class TipoEventoController extends Controller
     public function store(Request $request)
     {
         $tipoEvento = TipoEvento::create($request->all());
-        return response()->json(['message'=>'Adicionado com sucesso', "tipo"=>$tipoEvento]);
+        return response()->json(['message' => 'Adicionado com sucesso', "tipo" => $tipoEvento]);
     }
-
 
     public function show($id)
     {
         $tipoEvento = TipoEvento::findOrFail($id);
         return response()->json($tipoEvento);
     }
- 
+
     public function update(Request $request, $id)
     {
         $tipoEvento = TipoEvento::findOrFail($id);
         $tipoEvento->fill($request->all());
         $tipoEvento->save();
-        return response()->json(['message'=>'Alterado com sucesso']);
+        return response()->json(['message' => 'Alterado com sucesso']);
     }
-    
+
     public function destroy($id)
     {
         $tipoEvento = TipoEvento::findOrFail($id);
         $tipoEvento->delete();
-        return response()->json(['message'=>'Removido com sucesso']);
+        return response()->json(['message' => 'Removido com sucesso']);
     }
 }

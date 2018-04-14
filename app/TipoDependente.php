@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TipoDependente extends Model
 {
     protected $fillable = [
-       'id',  'descricao' 
+        'id', 'descricao',
     ];
-       
+
 }
