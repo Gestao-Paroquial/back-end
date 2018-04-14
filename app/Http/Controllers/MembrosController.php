@@ -56,6 +56,7 @@ class MembrosController extends Controller
         $membro = membro::findOrFail($id);
         $membro->fill($request->all());
         $membro->save();
+        
 
         foreach ($request->telefones as $telefone) {
             if(!isset($telefone["id"])){
@@ -81,18 +82,36 @@ class MembrosController extends Controller
        }
 
        foreach ($request->comunidades as $comunidade) {
-        if(!isset($comunidade["id"])){
-            $comunidade["membro_id"] = $membro->id;             
-            MembrosComunidade::create($comunidade);
-        }
+            if(!isset($comunidade["id"])){
+                $comunidade["membro_id"] = $membro->id;             
+                MembrosComunidade::create($comunidade);
+            }
         }
     
         foreach ($request->pastorais as $pastoral) {
-        if(!isset($pastoral["id"])){
-            $pastoral["membro_id"] = $membro->id;             
-            MembrosPastorai::create($pastoral);
+            if(!isset($pastoral["id"])){
+                $pastoral["membro_id"] = $membro->id;             
+                MembrosPastorai::create($pastoral);
+            }
         }
-        }
+
+        $getIds = function($item)
+        {
+            if(isset($item['id']))   return $item['id'];
+        };
+        
+
+        $todosOsIdsDasPastorais = array_map($getIds, $request->pastorais);
+
+        $pastoraisQuePrecisamSerRemovidasDesteUsuario = MembrosPastorai::where("membro_id", $membro->id)
+        ->whereNotIn('pastorai_id', $todosOsIdsDasPastorais)
+        ->delete();
+
+        $todosOsIdsDasComunidades = array_map($getIds, $request->comunidades);
+
+        $comunidadesQuePrecisamSerRemovidasDesteUsuario = MembrosComunidade::where("membro_id", $membro->id)
+        ->whereNotIn('comunidade_id', $todosOsIdsDasComunidades)
+        ->delete();
 
         return response()->json(['message'=> $membro->nome.' alterado com sucesso']);
     }
@@ -111,4 +130,5 @@ class MembrosController extends Controller
                     ->get();
         return $result;
     }
+    
 }
