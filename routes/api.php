@@ -30,6 +30,7 @@ Route::resource('tiposDependente', 'TipoDependenteController');
 Route::resource('dependentes', 'DependenteController');
 Route::resource('telefones', 'TelefoneController');
 
+Route::get('email','MailController@casamentoMail');
 Route::get('analytics', 'AnalyticsController@getData');
 
 Route::post('register', 'AuthController@register');
