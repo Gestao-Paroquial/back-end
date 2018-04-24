@@ -22,7 +22,7 @@ Route::resource('comunidades', 'ComunidadesController');
 Route::resource('dizimos', 'DizimosController');
 Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
-Route::resource('user', 'UsersController');
+Route::resource('users', 'UsersController');
 Route::resource('tipos', 'TiposController');
 Route::resource('tiposMembro', 'TipoMembroController');
 Route::resource('tiposEvento', 'TipoEventoController');
@@ -32,7 +32,7 @@ Route::resource('telefones', 'TelefoneController');
 
 Route::get('analytics', 'AnalyticsController@getData');
 
-Route::post('register', 'AuthController@register');
+Route::post('users/register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('recover', 'AuthController@recover');
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');

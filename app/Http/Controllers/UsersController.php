@@ -9,7 +9,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return response()->json(User::all());
+        return response()->json(User::all('id','name', 'email', 'is_verified'));
     }
 
     public function store(Request $request)
@@ -22,7 +22,9 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return response()->json($user);
+        return response()->json([
+            'id' => $user->id,'name' => $user->name, 'email' => $user->email, 'is_verified'=> $user->is_verified
+        ]);
     }
  
     public function update(Request $request, $id)
