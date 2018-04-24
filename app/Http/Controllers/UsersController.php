@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -18,7 +18,6 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
-
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -26,7 +25,7 @@ class UsersController extends Controller
             'id' => $user->id,'name' => $user->name, 'email' => $user->email, 'is_verified'=> $user->is_verified
         ]);
     }
- 
+
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -34,11 +33,11 @@ class UsersController extends Controller
         $user->save();
         return response()->json($user);
     }
-    
+
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return response()->json(['message'=>'removido com sucesso']);
+        return response()->json(['message' => 'removido com sucesso']);
     }
 }

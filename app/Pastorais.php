@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pastorais extends Model
 {
     protected $fillable = [
-        'comunidades_id','nome', 'descricao',
+        'comunidades_id', 'nome', 'descricao',
     ];
 
     public function comunidade()

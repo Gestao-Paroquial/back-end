@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class DependenteController extends Controller
 {
-  
+
     public function index()
     {
         return response()->json(Dependente::all());
@@ -19,13 +19,12 @@ class DependenteController extends Controller
         return response()->json($dependente);
     }
 
-
     public function show($id)
     {
         $dependente = Dependente::findOrFail($id);
         return response()->json($dependente);
     }
- 
+
     public function update(Request $request, $id)
     {
         $dependente = Dependente::findOrFail($id);
@@ -33,11 +32,11 @@ class DependenteController extends Controller
         $dependente->save();
         return response()->json($dependente);
     }
-    
+
     public function destroy($id)
     {
         $dependente = Dependente::findOrFail($id);
         $dependente->delete();
-        return response()->json(['message'=> 'Dependente '.$dependente->nome.' removido com sucesso']);
+        return response()->json(['message' => 'Dependente ' . $dependente->nome . ' removido com sucesso']);
     }
 }

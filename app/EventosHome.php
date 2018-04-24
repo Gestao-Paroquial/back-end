@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventosHome extends Model
 {
-      /**
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -16,6 +16,6 @@ class EventosHome extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'descricao','destino', 'imagem', 
+        'descricao', 'destino', 'imagem',
     ];
 }

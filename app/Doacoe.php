@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Doacoe extends Model
 {
     protected $fillable = [
-        'id', 'data', 'descricao', 'valor' 
+        'id', 'data', 'descricao', 'valor',
     ];
 
     public function comunidade()
