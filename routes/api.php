@@ -46,6 +46,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     });
 });
 Route::resource('membros', 'MembrosController');
+Route::get('membros/relatorio/count', 'MembrosController@count');
 Route::get('membros/relatorio/agrupadoPorTipo', 'MembrosController@relatorioAgrupadoPorTipo');
 Route::get('agenda/relatorio/agrupadoPorTipoDeEvento/{dateFilter}', 'AgendasController@relatorioAgrupadoPorTipo');
 Route::get('aniversariantes/{month}', 'MembrosController@aniversariantesDoMes');

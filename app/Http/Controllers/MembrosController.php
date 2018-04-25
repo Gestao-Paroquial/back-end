@@ -144,4 +144,8 @@ class MembrosController extends Controller
         
         return $result;
     }
+    public function count(){
+        $count = Membro::all()->count();
+        return response()->json(['quantidade' => $count]);
+    }
 }
