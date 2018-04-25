@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Agenda;
 use Illuminate\Http\Request;
 
@@ -41,5 +42,16 @@ class AgendasController extends Controller
         $agenda->delete();
 
         return response()->json(['message' => $agenda->titulo . ' removido com sucesso']);
+    }
+    public function relatorioAgrupadoPorTipo()
+    {
+        
+        $result = DB::table('agendas')
+        ->join('tipo_eventos', 'agendas.tipo_evento_id', '=', 'tipo_eventos.id')
+        ->select( DB::raw('COUNT(agendas.id) as quantidade, tipo_eventos.descricao'))
+        ->groupBy('descricao')
+        ->get();
+        
+        return $result;
     }
 }
