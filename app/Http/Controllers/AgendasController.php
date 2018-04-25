@@ -43,12 +43,13 @@ class AgendasController extends Controller
 
         return response()->json(['message' => $agenda->titulo . ' removido com sucesso']);
     }
-    public function relatorioAgrupadoPorTipo()
+    public function relatorioAgrupadoPorTipo($dateFilter)
     {
         
         $result = DB::table('agendas')
         ->join('tipo_eventos', 'agendas.tipo_evento_id', '=', 'tipo_eventos.id')
         ->select( DB::raw('COUNT(agendas.id) as quantidade, tipo_eventos.descricao'))
+        ->where('agendas.data_inicio_evento', '>=', $dateFilter.' 00:00:00')
         ->groupBy('descricao')
         ->get();
         
