@@ -7,6 +7,7 @@ use App\Membro;
 use App\MembrosComunidade;
 use App\MembrosPastorai;
 use App\Telefone;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class MembrosController extends Controller
@@ -131,5 +132,16 @@ class MembrosController extends Controller
                 MembrosComunidade::create($comunidade);
             }
         }
+    }
+    public function relatorioAgrupadoPorTipo()
+    {
+        
+        $result = DB::table('membros')
+        ->join('tipo_membros', 'membros.tipo_membro_id', '=', 'tipo_membros.id')
+        ->select( DB::raw('COUNT(membros.id) as quantidade, descricao'))
+        ->groupBy('descricao')
+        ->get();
+        
+        return $result;
     }
 }
