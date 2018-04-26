@@ -17,7 +17,9 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->string('nome',100)->nullable();
             $table->string('email',100)->nullable();
+            $table->string('mensagem')->nullable();
             $table->date('data')->nullable();
+            $table->boolean('aprovado')->nullable();
             $table->boolean('casamento')->nullable();
             $table->boolean('batismo')->nullable();
             $table->string('cpf')->nullable();         

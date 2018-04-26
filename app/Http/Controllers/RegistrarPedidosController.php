@@ -13,12 +13,14 @@ class RegistrarPedidosController extends Controller
         $pedido = new Pedido();
         $pedido->casamento = true;
         $pedido->batismo = false;
+        $pedido->aprovado = false;
         $pedido->nome = $request->nome;
+        $pedido->mensagem = $request->mensagem;
         $pedido->email =  $request->email;
         $pedido->data =  $request->data;
         $pedido->cpf =  $request->cpf;
 
-        
-        return response()->json(['success' => true, $pedido]);
+        $pedido->save();
+        return response()->json(['success' => true]);
     }
 }

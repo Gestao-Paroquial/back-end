@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use PagSeguro;
 
-use App\Note;
 use Illuminate\Http\Request;
 
 class PagseguroController extends Controller

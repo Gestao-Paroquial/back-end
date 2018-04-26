@@ -1,12 +1,17 @@
 function sendMail(form) {
     if (form) {
         $('.casamento__form').submit(function (event) {
-            var data = JSON.stringify($(form).serializeArray()); 
+            event.preventDefault();
 
-            console.log(data);
-            $.get('/api/registrarPedidoDeCasamento', data, (res) => {
-                if (res.success) {
-                    alert('Pedindo de casamento enviado com sucesso');
+            $.ajax({
+                type: 'post',
+                url: '/api/registrarPedidoDeCasamento',
+                data: JSON.stringify($(form).serializeArray()),
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                success: function (res) {
+                    console.log(res);
+                    if (res.success) alert('sucesso')
                 }
             });
         });
