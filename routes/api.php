@@ -53,3 +53,7 @@ Route::get('aniversariantes/{month}', 'MembrosController@aniversariantesDoMes');
 Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
+
+Route::resource('pagseguro', 'PagseguroController');
+Route::get('/pagamento',function(){ return "passou pagamento";})->name('pagseguro.redirect');
+Route::post('/notificacao',function(){ return "passou pagamento";})->name('pagseguro.notification');
