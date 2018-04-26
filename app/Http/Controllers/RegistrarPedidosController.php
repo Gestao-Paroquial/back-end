@@ -13,7 +13,7 @@ class RegistrarPedidosController extends Controller
         $pedido = new Pedido();
         $pedido->casamento = true;
         $pedido->batismo = false;
-        $pedido->aprovado = false;
+        $pedido->aprovado = 0;
         $pedido->nome = $request->nome;
         $pedido->mensagem = $request->mensagem;
         $pedido->email =  $request->email;
