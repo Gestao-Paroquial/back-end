@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use PagSeguro;
-use App\Pedido;
 
+use App\Pedido;
 use Illuminate\Http\Request;
+use PagSeguro;
 
 class PedidosController extends Controller
 {
@@ -23,16 +23,16 @@ class PedidosController extends Controller
     }
 
     public function registrarPedidoCasamento(Request $request)
-    {    
+    {
         $pedido = new Pedido();
         $pedido->casamento = true;
         $pedido->batismo = false;
         $pedido->aprovado = 0;
         $pedido->nome = $request->nome;
         $pedido->mensagem = $request->mensagem;
-        $pedido->email =  $request->email;
-        $pedido->data =  $request->data;
-        $pedido->cpf =  $request->cpf;
+        $pedido->email = $request->email;
+        $pedido->data = $request->data;
+        $pedido->cpf = $request->cpf;
 
         $pedido->save();
         return response()->json(['success' => true]);
@@ -46,22 +46,20 @@ class PedidosController extends Controller
                     'id' => $pedido->id,
                     'description' => 'Casamento',
                     'quantity' => 1,
-                    'amount' => 100.5
-                ]
+                    'amount' => 100.5,
+                ],
             ],
             'sender' => [
                 'name' => $pedido->nome,
                 'documents' => [
                     [
                         'number' => $pedido->cpf,
-                        'type' => 'CPF'
-                    ]
+                        'type' => 'CPF',
+                    ],
                 ],
             ],
             'currency' => 'BRL',
         ];
-
-   
 
         $checkout = PagSeguro::checkout()->createFromArray($data);
         $credentials = PagSeguro::credentials()->get();
@@ -74,8 +72,4 @@ class PedidosController extends Controller
         }
     }
 
-    public function notificacao(Request $request)
-    {
-        print_r($request->all());
-    }
 }

@@ -7,7 +7,7 @@ return [
     /*
      * Coloque abaixo as informações do seu cadastro no PagSeguro
      */
-    'credentials' => [//INFORME AS CREDENCIAIS PADRÕES DE SUA LOJA, MAS PORDERÁ SER ALTERADA EM RUNTIME
+    'credentials' => [ //INFORME AS CREDENCIAIS PADRÕES DE SUA LOJA, MAS PORDERÁ SER ALTERADA EM RUNTIME
         'email' => 'leocardosoti@gmail.com',
         'token' => 'B3BCCF457EE249349B11E5393350C885',
     ],
@@ -27,9 +27,9 @@ return [
             'route-name' => 'pagseguro.redirect', // Criar uma rota com este nome
         ],
         'notification' => [
-            'callback' => null, // Callable callback to Notification function (notificationInfo) : void {}
-            'credential' => 'default', // Callable resolve credential function (notificationCode) : Credentials {}
-            'route-name' => 'pagseguro.notification', // Criar uma rota com este nome
+            'callback' => ['\App\Http\Services\PedidoService', 'notification'], // Callable
+            'credential' => 'default',
+            'route-name' => 'pagseguro.notification', // Nome da rota
         ],
     ],
 
@@ -38,7 +38,7 @@ return [
      * Somente BRL é aceito no momento (Real do Brasil)
      * */
     'currency' => [
-        'type' => 'BRL'
+        'type' => 'BRL',
     ],
 
     /**
@@ -50,7 +50,7 @@ return [
             'options' => [
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_0,
                 //CURLOPT_PROXY => 'http://user:pass@host:port', // PROXY OPTION
-            ]
+            ],
         ],
     ],
 
@@ -59,7 +59,7 @@ return [
      * */
     'host' => [
         'production' => 'https://ws.pagseguro.uol.com.br',
-        'sandbox' => 'https://ws.sandbox.pagseguro.uol.com.br'
+        'sandbox' => 'https://ws.sandbox.pagseguro.uol.com.br',
     ],
     'url' => [
         'checkout' => '/v2/checkout',
