@@ -16,6 +16,7 @@ class CreateTipoMembrosTable extends Migration
         Schema::create('tipo_membros', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao',100);
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
         });
     }

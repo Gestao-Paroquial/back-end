@@ -16,6 +16,7 @@ class CreateTipoDoacoesTable extends Migration
         Schema::create('tipo_doacoes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
         });
     }
