@@ -6,9 +6,22 @@ use App\Pedido;
 
 use Illuminate\Http\Request;
 
-class RegistrarPedidosController extends Controller
+class PedidosController extends Controller
 {
-    public function casamento(Request $request)
+    public function index()
+    {
+        return response()->json(Pedido::all());
+    }
+
+    public function update(Request $request, $id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->fill($request->all());
+        $pedido->save();
+        return response()->json($pedido);
+    }
+
+    public function registrarPedidoCasamento(Request $request)
     {    
         $pedido = new Pedido();
         $pedido->casamento = true;
