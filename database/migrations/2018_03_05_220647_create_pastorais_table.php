@@ -19,7 +19,8 @@ class CreatePastoraisTable extends Migration
             $table->integer('classe_telefone_id')->unsigned();
             $table->integer('coordenador_id')->unsigned();
             $table->string('nome',100);
-            $table->string('descricao',255);            
+            $table->string('descricao',255);  
+            $table->boolean('excluido')->default(false);          
             $table->timestamps();
 
             $table->foreign('comunidade_id')

@@ -20,6 +20,7 @@ class CreateDoacoesTable extends Migration
             $table->datetime('data');
             $table->string('descricao');
             $table->decimal('valor');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
 

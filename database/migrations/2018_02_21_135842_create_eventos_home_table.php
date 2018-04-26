@@ -18,6 +18,7 @@ class CreateEventosHomeTable extends Migration
             $table->string('imagem', 500);
             $table->string('destino', 500);
             $table->string('descricao', 500);
+            $table->boolean('excluido')->default(false);
         });
     }
 

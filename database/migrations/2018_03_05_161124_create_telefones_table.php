@@ -18,6 +18,7 @@ class CreateTelefonesTable extends Migration
             $table->integer('classe_telefone_id')->unsigned();
             $table->integer('id_entidade');
             $table->string('telefone');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('classe_telefone_id')

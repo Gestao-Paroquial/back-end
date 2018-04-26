@@ -26,6 +26,7 @@ class CreateComunidadesTable extends Migration
             $table->string('cidade',50);
             $table->string('uf',2)->nullable();
             $table->string('cep',9);
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
 
             $table->foreign('classe_telefone_id')

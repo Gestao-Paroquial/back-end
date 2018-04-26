@@ -16,6 +16,7 @@ class CreateTipoEventosTable extends Migration
         Schema::create('tipo_eventos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao');
+            $table->boolean('excluido')->default(false);
             $table->timestamps();
         });
     }
