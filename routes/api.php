@@ -58,4 +58,4 @@ Route::resource('pedidos', 'PedidosController');
 Route::resource('pagseguro', 'PagseguroController');
 Route::post('/registrarPedidoDeCasamento','PedidosController@registrarPedidoCasamento');
 Route::get('/pagamento',function(){ return "passou pagamento";})->name('pagseguro.redirect');
-Route::post('/notificacao',function(){ return "passou pagamento";})->name('pagseguro.notification');
+Route::post('/notificacao','PedidosController@notificacao')->name('pagseguro.notification');

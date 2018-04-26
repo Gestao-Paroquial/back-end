@@ -18,6 +18,7 @@ class PedidosController extends Controller
         $pedido = Pedido::findOrFail($id);
         $pedido->fill($request->all());
         $pedido->save();
+        $this->checkoutCasamento($pedido);
         return response()->json($pedido);
     }
 
@@ -35,5 +36,46 @@ class PedidosController extends Controller
 
         $pedido->save();
         return response()->json(['success' => true]);
+    }
+
+    public function checkoutCasamento($pedido)
+    {
+        $data = [
+            'items' => [
+                [
+                    'id' => $pedido->id,
+                    'description' => 'Casamento',
+                    'quantity' => 1,
+                    'amount' => 100.5
+                ]
+            ],
+            'sender' => [
+                'name' => $pedido->nome,
+                'documents' => [
+                    [
+                        'number' => $pedido->cpf,
+                        'type' => 'CPF'
+                    ]
+                ],
+            ],
+            'currency' => 'BRL',
+        ];
+
+   
+
+        $checkout = PagSeguro::checkout()->createFromArray($data);
+        $credentials = PagSeguro::credentials()->get();
+        $information = $checkout->send($credentials); // Retorna um objeto de laravel\pagseguro\Checkout\Information\Information
+        if ($information) {
+            $pedido->code = $information->getCode();
+            $pedido->data_do_checkout = $information->getDate();
+            $pedido->link = $information->getLink();
+            $pedido->save();
+        }
+    }
+
+    public function notificacao(Request $request)
+    {
+        print_r($request->all());
     }
 }
