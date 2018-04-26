@@ -1,9 +1,10 @@
 function sendMail(form) {
     if (form) {
         $('.casamento__form').submit(function (event) {
-            event.preventDefault();
-            
-            $.get('http://localhost:3025/casamento', $(this).serialize(), (res) => {
+            var data = JSON.stringify($(form).serializeArray()); 
+
+            console.log(data);
+            $.get('/api/registrarPedidoDeCasamento', data, (res) => {
                 if (res.success) {
                     alert('Pedindo de casamento enviado com sucesso');
                 }
