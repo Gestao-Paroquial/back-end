@@ -18,7 +18,8 @@ class PedidosController extends Controller
         $pedido = Pedido::findOrFail($id);
         $pedido->fill($request->all());
         $pedido->save();
-        $this->checkoutCasamento($pedido);
+        if ($pedido->aprovado == 1) $this->checkoutCasamento($pedido);
+        
         return response()->json($pedido);
     }
 
