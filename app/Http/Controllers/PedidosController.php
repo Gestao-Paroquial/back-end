@@ -65,7 +65,7 @@ class PedidosController extends Controller
         $credentials = PagSeguro::credentials()->get();
         $information = $checkout->send($credentials); // Retorna um objeto de laravel\pagseguro\Checkout\Information\Information
         if ($information) {
-            $pedido->code = $information->getCode();
+            $pedido->code = 1;
             $pedido->data_do_checkout = $information->getDate();
             $pedido->link = $information->getLink();
             $pedido->save();
