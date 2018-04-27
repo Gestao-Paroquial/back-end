@@ -3,10 +3,15 @@ function sendMail(form) {
         $('.casamento__form').submit(function (event) {
             event.preventDefault();
 
+            const data = $(form).serializeArray().reduce((prev, curr)=>{
+                prev[curr.name] = curr.value;
+                return prev
+            },{});
+
             $.ajax({
                 type: 'post',
                 url: '/api/registrarPedidoDeCasamento',
-                data: JSON.stringify($(form).serializeArray()),
+                data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
                 success: function (res) {
