@@ -2,10 +2,21 @@ function sendMail(form) {
     if (form) {
         $('.casamento__form').submit(function (event) {
             event.preventDefault();
-            
-            $.get('http://localhost:3025/casamento', $(this).serialize(), (res) => {
-                if (res.success) {
-                    alert('Pedindo de casamento enviado com sucesso');
+
+            const data = $(form).serializeArray().reduce((prev, curr)=>{
+                prev[curr.name] = curr.value;
+                return prev
+            },{});
+
+            $.ajax({
+                type: 'post',
+                url: '/api/registrarPedidoDeCasamento',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                success: function (res) {
+                    console.log(res);
+                    if (res.success) alert('sucesso')
                 }
             });
         });

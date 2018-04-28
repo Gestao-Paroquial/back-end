@@ -53,3 +53,13 @@ Route::get('aniversariantes/{month}', 'MembrosController@aniversariantesDoMes');
 Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
+Route::resource('pedidos', 'PedidosController');
+
+Route::resource('pagseguro', 'PagseguroController');
+Route::post('/registrarPedidoDeCasamento','PedidosController@registrarPedidoCasamento');
+Route::get('/pagamento',function(){ return "passou pagamento";})->name('pagseguro.redirect');
+
+Route::post('notificacao', [
+    'uses' => '\laravel\pagseguro\Platform\Laravel5\NotificationController@notification',
+    'as' => 'pagseguro.notification',
+]);
