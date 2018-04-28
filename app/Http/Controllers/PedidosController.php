@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PedidoAprovado;
 use App\Pedido;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use PagSeguro;
 
 class PedidosController extends Controller
@@ -18,9 +20,11 @@ class PedidosController extends Controller
         $pedido = Pedido::findOrFail($id);
         $pedido->fill($request->all());
         $pedido->save();
-        if ($pedido->aprovado == 1) $this->checkoutCasamento($pedido);
-        
-        return response()->json($pedido);
+        if ($pedido->aprovado == 1) {
+            $this->checkoutCasamento($pedido);
+        }
+
+        return response()->json(['success' => true]);
     }
 
     public function registrarPedidoCasamento(Request $request)
@@ -70,7 +74,13 @@ class PedidosController extends Controller
             $pedido->data_do_checkout = $information->getDate();
             $pedido->link = $information->getLink();
             $pedido->save();
+            $this->enviarEmailDeAprovacao($pedido);
         }
+    }
+
+    public function enviarEmailDeAprovacao($pedido)
+    {
+        Mail::to('leocardosoti@gmail.com')->send(new PedidoAprovado($pedido));
     }
 
 }
