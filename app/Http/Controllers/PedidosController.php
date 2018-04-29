@@ -7,6 +7,7 @@ use App\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use PagSeguro;
+use Validator;
 
 class PedidosController extends Controller
 {
@@ -29,6 +30,18 @@ class PedidosController extends Controller
 
     public function registrarPedidoCasamento(Request $request)
     {
+        $rules = [
+            'email' => 'required|email|max:255',
+            'cpf' => 'required|min:11',
+            'data' => 'required|date',
+            'nome' => 'required|min:5',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->messages()]);
+        }
+
         $pedido = new Pedido();
         $pedido->casamento = true;
         $pedido->batismo = false;
@@ -80,7 +93,7 @@ class PedidosController extends Controller
 
     public function enviarEmailDeAprovacao($pedido)
     {
-        Mail::to('leocardosoti@gmail.com')->send(new PedidoAprovado($pedido));
+        Mail::to($pedido->email)->send(new PedidoAprovado($pedido));
     }
 
 }
