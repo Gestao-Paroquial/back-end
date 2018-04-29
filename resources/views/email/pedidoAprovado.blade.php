@@ -15,8 +15,8 @@
     <br>
 
     <a href="{{$link}}">Clique aqui para efetuar o pagamento </a>
-
-    <br/>
+    <br>
+    <br>
     Obrigado,<br>
     Paroquia São Lucas Evangelista
 </div>
