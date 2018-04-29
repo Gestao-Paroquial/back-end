@@ -1,12 +1,16 @@
+const showErrors = (error) => Object.values(error).forEach(alert);
+
+const formValuesToObject = (form) => $(form).serializeArray().reduce((prev, curr)=>{
+    prev[curr.name] = curr.value;
+    return prev
+},{});
+
 function sendMail(form) {
     if (form) {
         $('.casamento__form').submit(function (event) {
-            event.preventDefault();
+            event.preventDefault(); 
 
-            const data = $(form).serializeArray().reduce((prev, curr)=>{
-                prev[curr.name] = curr.value;
-                return prev
-            },{});
+            const data = formValuesToObject(form);
 
             $.ajax({
                 type: 'post',
@@ -15,8 +19,8 @@ function sendMail(form) {
                 contentType: "application/json; charset=utf-8",
                 traditional: true,
                 success: function (res) {
-                    console.log(res);
                     if (res.success) alert('sucesso')
+                    if(res.error) showErrors(res.error);
                 }
             });
         });
