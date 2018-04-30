@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PedidoAprovado;
+use App\Mail\PedidoReprovado;
 use App\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +24,8 @@ class PedidosController extends Controller
         $pedido->save();
         if ($pedido->aprovado == 1) {
             $this->checkoutCasamento($pedido);
+        } else if ($pedido->aprovado == 2) {
+            $this->enviarEmailDeReprovacao($pedido, $request->conteudoEmail);
         }
 
         return response()->json(['success' => true]);
@@ -94,6 +97,11 @@ class PedidosController extends Controller
     public function enviarEmailDeAprovacao($pedido)
     {
         Mail::to($pedido->email)->send(new PedidoAprovado($pedido));
+    }
+
+    public function enviarEmailDeReprovacao($pedido, $conteudoEmail)
+    {
+        Mail::to($pedido->email)->send(new PedidoReprovado($conteudoEmail));
     }
 
 }
