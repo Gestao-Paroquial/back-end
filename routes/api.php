@@ -45,6 +45,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
         return response()->json(['success'=>true]);
     });
 });
+
 Route::resource('membros', 'MembrosController');
 Route::get('membros/relatorio/count', 'MembrosController@count');
 Route::get('membros/relatorio/agrupadoPorTipo', 'MembrosController@relatorioAgrupadoPorTipo');
