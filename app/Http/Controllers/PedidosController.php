@@ -31,7 +31,7 @@ class PedidosController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function registrarPedidoCasamento(Request $request)
+    public function store(Request $request)
     {
         $rules = [
             'email' => 'required|email|max:255',
@@ -46,14 +46,16 @@ class PedidosController extends Controller
         }
 
         $pedido = new Pedido();
-        $pedido->casamento = true;
-        $pedido->batismo = false;
+        $pedido->casamento = $request->casamento;
+        $pedido->batismo = $request->batismo;
         $pedido->aprovado = 0;
         $pedido->nome = $request->nome;
         $pedido->mensagem = $request->mensagem;
         $pedido->email = $request->email;
         $pedido->data = $request->data;
         $pedido->cpf = $request->cpf;
+        $pedido->telefone = $request->telefone;
+
 
         $pedido->save();
         return response()->json(['success' => true]);
