@@ -15,7 +15,8 @@
         "laravel/tinker": "~1.0",
         "michael/laravelpagseguro": "dev-master",
         "pagseguro/pagseguro-php-sdk": "*",
-        "tymon/jwt-auth": "1.0.0-rc.1"
+        "tymon/jwt-auth": "1.0.0-rc.1",
+        "laravellegends/pt-br-validator" : "5.1.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

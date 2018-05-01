@@ -37,7 +37,7 @@ class PedidosController extends Controller
     {
         $rules = [
             'email' => 'required|email|max:255',
-            'cpf' => 'required|min:11',
+            'cpf' => 'required|cpf',
             'data' => 'required|date',
             'nome' => 'required|min:5',
         ];
@@ -56,7 +56,7 @@ class PedidosController extends Controller
         $pedido->email = $request->email;
         $pedido->data = $request->data;
         $pedido->cpf = $request->cpf;
-        $pedido->telefone = $request->telefone;
+        // $pedido->telefone = $request->telefone;
 
         $pedido->save();
         return response()->json(['success' => true]);
