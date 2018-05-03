@@ -50,7 +50,7 @@ class PagSeguroService
                                 ->addItem(new Item($id, $name, $value))
                                 ->getCheckout();
             
-            $checkout->setNotificationURL( env('APP_URL')."/api/notificacao" );
+            $checkout->setNotificationURL( env('APP_URL')."/api/pagseguro/notificacao" );
             $response = $service->checkout($checkout);
         
 
