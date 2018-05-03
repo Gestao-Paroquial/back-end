@@ -54,8 +54,4 @@ Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
 Route::resource('pagseguro', 'PagseguroController');
 Route::get('/pagamento', function () {return "passou pagamento";})->name('pagseguro.redirect');
-
-Route::post('notificacao', [
-    'uses' => '\laravel\pagseguro\Platform\Laravel5\NotificationController@notification',
-    'as' => 'pagseguro.notification',
-]);
+Route::post('notificacao', '\App\Http\Services\PagSeguroService@notificacao');
