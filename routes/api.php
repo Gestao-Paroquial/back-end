@@ -52,6 +52,4 @@ Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
-Route::resource('pagseguro', 'PagseguroController');
-Route::get('/pagamento', function () {return "passou pagamento";})->name('pagseguro.redirect');
-Route::post('notificacao', '\App\Http\Services\PagSeguroService@notificacao');
+Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
