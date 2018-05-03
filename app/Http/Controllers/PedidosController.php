@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\PedidoAprovado;
 use App\Mail\PedidoReprovado;
-use App\Http\Services\PagSeguroService;
 use App\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
