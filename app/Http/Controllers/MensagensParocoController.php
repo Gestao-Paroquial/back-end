@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\MensagensParoco;
 use Illuminate\Http\Request;
 
+use App\Http\Services\FCMService;
+
 class MensagensParocoController extends Controller
 {
 
@@ -16,6 +18,7 @@ class MensagensParocoController extends Controller
     public function store(Request $request)
     {
         $mensagensParoco = MensagensParoco::create($request->all());
+        FCMService::sendPushNotificationToTopic($mensagensParoco->titulo, $mensagensParoco->mensagem, 'all');
         return response()->json(['message' => 'Adicionado com sucesso']);
     }
 
