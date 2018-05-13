@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Mail\PedidoAprovado;
 use App\Mail\PedidoReprovado;
+use App\Http\Services\PagSeguroService;
 use App\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use PagSeguro;
 use Validator;
+use PHPSC\PagSeguro\Purchases\Subscriptions\Locator as SubscriptionLocator;
+use PHPSC\PagSeguro\Purchases\Transactions\Locator as TransactionLocator;
 
 class PedidosController extends Controller
 {
@@ -20,22 +23,38 @@ class PedidosController extends Controller
     public function update(Request $request, $id)
     {
         $pedido = Pedido::findOrFail($id);
-        $pedido->fill($request->all());
-        $pedido->save();
-        if ($pedido->aprovado == 1) {
-            $this->checkoutCasamento($pedido);
-        } else if ($pedido->aprovado == 2) {
-            $this->enviarEmailDeReprovacao($pedido, $request->conteudoEmail);
-        }
+        $pedido->fill($request->all());        
+        
+        
+        if ($pedido->aprovado == 2) $this->enviarEmailDeReprovacao($pedido, $request->conteudoEmail);
 
+        $itemName;
+        $value;
+        if ($pedido->aprovado == 1 && $pedido->casamento == 1) {
+            $itemName = "Casamento";
+            $value = 100;
+        } else if ($pedido->aprovado == 1 && $pedido->batismo == 1) {
+            $itemName = "Batismo";
+            $value = 100;
+        } 
+
+        if ($pedido->aprovado == 1)  
+        {
+            $pagseguroService = new PagSeguroService();
+            $pedido->link = $pagseguroService->checkout($pedido->id, $itemName, $value);
+            $pedido->code = 1;
+            $this->enviarEmailDeAprovacao($pedido);
+        }        
+        
+        $pedido->save();
         return response()->json(['success' => true]);
     }
 
-    public function registrarPedidoCasamento(Request $request)
+    public function store(Request $request)
     {
         $rules = [
             'email' => 'required|email|max:255',
-            'cpf' => 'required|min:11',
+            'cpf' => 'required|cpf',
             'data' => 'required|date',
             'nome' => 'required|min:5',
         ];
@@ -46,54 +65,19 @@ class PedidosController extends Controller
         }
 
         $pedido = new Pedido();
-        $pedido->casamento = true;
-        $pedido->batismo = false;
+        $pedido->casamento = $request->casamento;
+        $pedido->batismo = $request->batismo;
         $pedido->aprovado = 0;
         $pedido->nome = $request->nome;
         $pedido->mensagem = $request->mensagem;
         $pedido->email = $request->email;
         $pedido->data = $request->data;
         $pedido->cpf = $request->cpf;
+        // $pedido->telefone = $request->telefone;
 
         $pedido->save();
         return response()->json(['success' => true]);
     }
-
-    public function checkoutCasamento($pedido)
-    {
-        $data = [
-            'items' => [
-                [
-                    'id' => $pedido->id,
-                    'description' => 'Casamento',
-                    'quantity' => 1,
-                    'amount' => 100.5,
-                ],
-            ],
-            'sender' => [
-                'name' => $pedido->nome,
-                'documents' => [
-                    [
-                        'number' => $pedido->cpf,
-                        'type' => 'CPF',
-                    ],
-                ],
-            ],
-            'currency' => 'BRL',
-        ];
-
-        $checkout = PagSeguro::checkout()->createFromArray($data);
-        $credentials = PagSeguro::credentials()->get();
-        $information = $checkout->send($credentials); // Retorna um objeto de laravel\pagseguro\Checkout\Information\Information
-        if ($information) {
-            $pedido->code = 1;
-            $pedido->data_do_checkout = $information->getDate();
-            $pedido->link = $information->getLink();
-            $pedido->save();
-            $this->enviarEmailDeAprovacao($pedido);
-        }
-    }
-
     public function enviarEmailDeAprovacao($pedido)
     {
         Mail::to($pedido->email)->send(new PedidoAprovado($pedido));

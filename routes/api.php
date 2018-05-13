@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,7 +9,7 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::post('uploadImagem', ['uses' => 'ImagesController@save']);
 Route::resource('agenda', 'AgendasController');
@@ -37,12 +35,12 @@ Route::post('login', 'AuthController@login');
 Route::post('recover', 'AuthController@recover');
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
 
-Route::group(['middleware' => ['jwt.auth']], function() {
+Route::group(['middleware' => ['jwt.auth']], function () {
     Route::get('logout', 'AuthController@logout');
 
     //Rota para validar os tokens
-    Route::get('validateToken', function(){
-        return response()->json(['success'=>true]);
+    Route::get('validateToken', function () {
+        return response()->json(['success' => true]);
     });
 });
 
@@ -55,13 +53,5 @@ Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
-
-Route::resource('pagseguro', 'PagseguroController');
-Route::post('/registrarPedidoDeCasamento','PedidosController@registrarPedidoCasamento');
-Route::get('/pagamento',function(){ return "passou pagamento";})->name('pagseguro.redirect');
-
-Route::post('notificacao', [
-    'uses' => '\laravel\pagseguro\Platform\Laravel5\NotificationController@notification',
-    'as' => 'pagseguro.notification',
-]);
 Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
+Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
