@@ -19,5 +19,5 @@ Route::group(['middleware' => ['web']], function () {
         return "bar";
     });
 });
-Route::get('santododia/titulo','SantoDoDiaController@getTitleSaintOfDay');
+
 

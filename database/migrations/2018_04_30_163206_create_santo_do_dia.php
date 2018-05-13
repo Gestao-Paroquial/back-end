@@ -15,11 +15,11 @@ class CreateSantoDoDia extends Migration
     {
         Schema::create('santo_do_dia', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome',100)->nullable();
-            $table->mediumText('historia')->nullable();
-            $table->string('titulo_historia')->nullable();
-            $table->date('dia')->nullable();  
-            $table->binary('imagem');                
+            $table->string('name',100);
+            $table->mediumText('history');
+            $table->string('day',2);
+            $table->string('month',30);  
+            $table->string('image',500);                
             $table->timestamps();
         });
     }
