@@ -19,5 +19,3 @@ Route::group(['middleware' => ['web']], function () {
         return "bar";
     });
 });
-
-
