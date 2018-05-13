@@ -43,6 +43,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
         return response()->json(['success' => true]);
     });
 });
+
 Route::resource('membros', 'MembrosController');
 Route::get('membros/relatorio/count', 'MembrosController@count');
 Route::get('membros/relatorio/agrupadoPorTipo', 'MembrosController@relatorioAgrupadoPorTipo');
@@ -52,4 +53,5 @@ Route::resource('mensagensParoco', 'MensagensParocoController');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
+Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
 Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
