@@ -33,5 +33,5 @@ class NoteController extends Controller
         $note = Note::findOrFail($id);
         $note->delete();
         return response()->json(['message' => 'removido com sucesso']);
-    }
+    }  
 }
