@@ -18,6 +18,7 @@ Route::resource('batismos', 'BatismosController');
 Route::resource('casamentos', 'CasamentosController');
 Route::resource('comunidades', 'ComunidadesController');
 Route::resource('dizimos', 'DizimosController');
+
 Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('users', 'UsersController');
@@ -50,6 +51,8 @@ Route::get('membros/relatorio/agrupadoPorTipo', 'MembrosController@relatorioAgru
 Route::get('agenda/relatorio/agrupadoPorTipoDeEvento/{dateFilter}', 'AgendasController@relatorioAgrupadoPorTipo');
 Route::get('aniversariantes/{month}', 'MembrosController@aniversariantesDoMes');
 Route::resource('mensagensParoco', 'MensagensParocoController');
+Route::get('mensagensParocoPaginacao', 'MensagensParocoController@paginacao');
+
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
