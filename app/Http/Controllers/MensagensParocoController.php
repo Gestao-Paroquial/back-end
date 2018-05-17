@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\MensagensParoco;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Http\Services\FCMService;
 
@@ -13,7 +12,7 @@ class MensagensParocoController extends Controller
 
     public function index()
     {
-        return response()->json(DB::table('mensagens_parocos')->paginate(15));
+        return response()->json(MensagensParoco::all());
     }
 
     public function store(Request $request)
