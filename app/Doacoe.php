@@ -14,4 +14,6 @@ class Doacoe extends Model
     {
         return $this->belongsTo(Comunidade::class);
     }
+
+   const DESCRICAO_PAGSEGURO ='Doação';
 }

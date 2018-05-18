@@ -27,7 +27,7 @@ class DoacoesController extends Controller
         $doacao = Doacoe::create($request->all());
         $doacao->fill(['code' => 1]);
         $pagseguroService = new PagSeguroService();
-        $link = $pagseguroService->checkout($doacao->id, "Doação" , $doacao->valor);
+        $link = $pagseguroService->checkout($doacao->id, Doacoe::DESCRICAO_PAGSEGURO , $doacao->valor);
         return response()->json(["doacao" => $doacao, "link" => $link]);
     }
     public function update(Request $request, $id)
