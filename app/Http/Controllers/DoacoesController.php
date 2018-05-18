@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Doacoe;
 use Illuminate\Http\Request;
+use App\Http\Services\PagSeguroService;
 
 class DoacoesController extends Controller
 {
@@ -23,8 +24,11 @@ class DoacoesController extends Controller
     }
     public function store(Request $request)
     {
-        $Doacoe = Doacoe::create($request->all());
-        return response()->json($Doacoe);
+        $doacao = Doacoe::create($request->all());
+        $doacao->fill(['code' => 1]);
+        $pagseguroService = new PagSeguroService();
+        $link = $pagseguroService->checkout($doacao->id, "Doação" , $doacao->valor);
+        return response()->json(["doacao" => $doacao, "link" => $link]);
     }
     public function update(Request $request, $id)
     {

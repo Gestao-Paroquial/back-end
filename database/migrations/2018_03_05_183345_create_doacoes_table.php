@@ -15,11 +15,12 @@ class CreateDoacoesTable extends Migration
     {
         Schema::create('doacoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('comunidade_id')->unsigned();
-            $table->integer('tipo_doacoe_id')->unsigned();
+            $table->integer('comunidade_id')->unsigned()->nullable();
+            $table->integer('tipo_doacoe_id')->unsigned()->nullable();
             $table->datetime('data');
             $table->string('descricao');
             $table->decimal('valor');
+            $table->integer('code')->nullable();
             $table->boolean('excluido')->default(false);
             $table->timestamps();
 
