@@ -13,6 +13,7 @@ use PHPSC\PagSeguro\Requests\PreApprovals\PreApprovalService;
 use PHPSC\PagSeguro\Purchases\Subscriptions\Locator as SubscriptionLocator;
 use PHPSC\PagSeguro\Purchases\Transactions\Locator as TransactionLocator;
 use App\Pedido;
+use App\Doacoe;
 
 // /* Ambiente de produção: */
 
@@ -95,13 +96,22 @@ class PagSeguroService
                        : new TransactionLocator($this->getCredentials()); 
                        
             $purchase = $service->getByNotification($_POST['notificationCode']);
-        
-            $id = $purchase->getItems()[0]->getId(); 
             $code = $purchase->getDetails()->getStatus();
+            $item = $purchase->getItems()[0];
+            $id = $item ->getId(); 
+            $description = $item->getDescription();
+            
+            if ($description == Doacoe::DESCRICAO_PAGSEGURO) {
+                $doacao = Doacoe::findOrFail($id);
+                $doacao->code = $code;
+                $doacao->save();
+            } else {
+                $pedido = Pedido::findOrFail($id);
+                $pedido->code = $code;
+                $pedido->save();
+            }           
 
-            $pedido = Pedido::findOrFail($id);
-            $pedido->code = $code;
-            $pedido->save();
+            
         } catch (Exception $error) { // Caso ocorreu algum erro
             echo $error->getMessage(); // Exibe na tela a mensagem de erro
         }
