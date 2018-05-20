@@ -17,8 +17,8 @@ class CreateDoacoesTable extends Migration
             $table->increments('id');
             $table->integer('comunidade_id')->unsigned()->nullable();
             $table->integer('tipo_doacoe_id')->unsigned()->nullable();
-            $table->datetime('data');
             $table->string('descricao');
+            $table->string('nome_doador')->nullable();
             $table->decimal('valor');
             $table->integer('code')->nullable();
             $table->boolean('excluido')->default(false);
