@@ -10,7 +10,7 @@ use LaravelFCM\Message\Topics;
 
 class FCMService 
 {
-    public static function sendPushNotificationToTopic($title, $body, $topicName, $sound = "default")
+    public static function sendPushNotificationToTopic($title, $body, $topicName, $data, $sound = "default")
     {
         $notificationBuilder = new PayloadNotificationBuilder($title);
         $notificationBuilder->setBody($body)
@@ -21,7 +21,7 @@ class FCMService
         $topic = new Topics();
         $topic->topic($topicName);
 
-        $topicResponse = FCM::sendToTopic($topic, null, $notification, null);
+        $topicResponse = FCM::sendToTopic($topic, null, $notification, $data);
 
         $topicResponse->isSuccess();
         $topicResponse->shouldRetry();
