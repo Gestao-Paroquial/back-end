@@ -126,8 +126,8 @@ class PagSeguroService
 
     private function sendRequestToBillingCycle($doacao){
         $query = '
-        mutation AddToDonationGroup($donationGroup: String! ,$debt: DebtInput!) {
-            addToDonationGroup(donationGroup: $donationGroup, debt: $debt) {
+        mutation AddToDonationGroup($donationGroup: String! ,$credit: DebtInput!) {
+            addToDonationGroup(donationGroup: $donationGroup, credit: $credit) {
               id
             }
           }
@@ -148,7 +148,7 @@ class PagSeguroService
             '12'=>'Dezembro'
         );        
     
-        $debt = [
+        $credit = [
                 "name" => "Doação efetuada em ".date("d-m-Y"),
                 "value" => $doacao->valor,
                 "donationId" => $doacao->id,
@@ -157,7 +157,7 @@ class PagSeguroService
         $donationGroup = $meses[date('m')]. ' de '. date('Y');
         
         $variables = [
-            'debt' =>  $debt,
+            'credit' =>  $credit,
             'donationGroup' => $donationGroup,
         ];
         
