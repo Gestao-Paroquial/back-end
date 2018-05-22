@@ -14,6 +14,10 @@ use PHPSC\PagSeguro\Purchases\Subscriptions\Locator as SubscriptionLocator;
 use PHPSC\PagSeguro\Purchases\Transactions\Locator as TransactionLocator;
 use App\Pedido;
 use App\Doacoe;
+use App\User;
+use JWTAuth;
+use Illuminate\Support\Facades\DB;
+
 
 // /* Ambiente de produção: */
 
@@ -105,6 +109,9 @@ class PagSeguroService
                 $doacao = Doacoe::findOrFail($id);
                 $doacao->code = $code;
                 $doacao->save();
+                if ($code == 4) {
+                    $this->sendRequestToBillingCycle($doacao);
+                }
             } else {
                 $pedido = Pedido::findOrFail($id);
                 $pedido->code = $code;
@@ -115,5 +122,70 @@ class PagSeguroService
         } catch (Exception $error) { // Caso ocorreu algum erro
             echo $error->getMessage(); // Exibe na tela a mensagem de erro
         }
+    }
+
+    private function sendRequestToBillingCycle($doacao){
+        $query = '
+        mutation AddToDonationGroup($donationGroup: String! ,$debt: DebtInput!) {
+            addToDonationGroup(donationGroup: $donationGroup, debt: $debt) {
+              id
+            }
+          }
+        ';
+
+        $meses = array(
+            '01'=>'Janeiro',
+            '02'=>'Fevereiro',
+            '03'=>'Março',
+            '04'=>'Abril',
+            '05'=>'Maio',
+            '06'=>'Junho',
+            '07'=>'Julho',
+            '08'=>'Agosto',
+            '09'=>'Setembro',
+            '10'=>'Outubro',
+            '11'=>'Novembro',
+            '12'=>'Dezembro'
+        );        
+    
+        $debt = [
+                "name" => "Doação efetuada em ".date("d-m-Y"),
+                "value" => $doacao->valor,
+                "donationId" => $doacao->id,
+        ];
+
+        $donationGroup = $meses[date('m')]. ' de '. date('Y');
+        
+        $variables = [
+            'debt' =>  $debt,
+            'donationGroup' => $donationGroup,
+        ];
+        
+        $json = json_encode(['query' => $query, 'variables' => $variables]);
+
+        $user = DB::table('users')->first();
+
+        $token =  JWTAuth::attempt([
+            "email" => $user->email,
+            "password" => '1234',
+            "is_verified" => 1
+        ]);
+        
+        $chObj = curl_init();
+        curl_setopt($chObj, CURLOPT_URL, env('GRAPHQL_SERVER'));
+        curl_setopt($chObj, CURLOPT_RETURNTRANSFER, true);    
+        curl_setopt($chObj, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($chObj, CURLOPT_HEADER, true);
+        curl_setopt($chObj, CURLOPT_VERBOSE, true);
+        curl_setopt($chObj, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($chObj, CURLOPT_HTTPHEADER,
+             array(
+                    'User-Agent: PHP Script',
+                    'Content-Type: application/json;charset=utf-8',
+                    'Authorization: Bearer '.$token
+                )
+            ); 
+    
+        $response = curl_exec($chObj);
     }
 }
