@@ -13,7 +13,7 @@ class MensagensParocoController extends Controller
 
     public function index()
     {
-        return response()->json(MensagensParoco::all()->sortBy("id"));
+        return response()->json(MensagensParoco::all()->sortByDesc("id"));
     }
 
     public function paginacao()
