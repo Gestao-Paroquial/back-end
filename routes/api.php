@@ -64,4 +64,7 @@ Route::post('notificacao', [
     'uses' => '\laravel\pagseguro\Platform\Laravel5\NotificationController@notification',
     'as' => 'pagseguro.notification',
 ]);
-Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
+Route::post('santododia','SantoDoDiaController@storeSaintOfDay');
+
+Route::post('liturgia','LiturgiaDiariaController@storeDailyLiturgy');
+Route::get('liturgia/{year}/{month}/{day}','LiturgiaDiariaController@showDailyLiturgyFiltered');

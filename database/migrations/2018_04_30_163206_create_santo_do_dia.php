@@ -13,7 +13,7 @@ class CreateSantoDoDia extends Migration
      */
     public function up()
     {
-        Schema::create('santo_do_dia', function (Blueprint $table) {
+        Schema::create('santos_do_dia', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',100);
             $table->mediumText('history');
@@ -31,6 +31,6 @@ class CreateSantoDoDia extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('santo_do_dia');
+        Schema::dropIfExists('santos_do_dia');
     }
 }
