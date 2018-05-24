@@ -13,7 +13,9 @@ class AgendasController extends Controller
         $agenda = new Agenda();
 
         
-        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva','batismo:id,agenda_id,nomeBatizando,dataNascimento'])->get();
+        $result = $agenda->with(['casamento:id,agenda_id,nomeNoivo,dataNascNoivo,nomeNoiva,dataNascNoiva','batismo:id,agenda_id,nomeBatizando,dataNascimento']
+        )->orderBy('data_inicio_evento', 'DESC')
+        ->get();
 
         return $result;
     }
