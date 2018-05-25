@@ -78,12 +78,20 @@ class PedidosController extends Controller
     }
     public function enviarEmailDeAprovacao($pedido)
     {
-        Mail::to($pedido->email)->send(new PedidoAprovado($pedido));
+        try {
+            Mail::to($pedido->email)->send(new PedidoAprovado($pedido));
+        } catch(Exception $e) {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }       
     }
 
     public function enviarEmailDeReprovacao($pedido, $conteudoEmail)
     {
-        Mail::to($pedido->email)->send(new PedidoReprovado($conteudoEmail));
+        try {
+            Mail::to($pedido->email)->send(new PedidoReprovado($conteudoEmail));
+        } catch(Exception $e) {
+            echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+        }
     }
 
 }
