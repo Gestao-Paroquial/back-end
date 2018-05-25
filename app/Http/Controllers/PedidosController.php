@@ -29,13 +29,11 @@ class PedidosController extends Controller
         if ($pedido->aprovado == 2) $this->enviarEmailDeReprovacao($pedido, $request->conteudoEmail);
 
         $itemName;
-        $value;
+        $value = $request->preco;
         if ($pedido->aprovado == 1 && $pedido->casamento == 1) {
             $itemName = "Casamento";
-            $value = 100;
         } else if ($pedido->aprovado == 1 && $pedido->batismo == 1) {
             $itemName = "Batismo";
-            $value = 100;
         } 
 
         if ($pedido->aprovado == 1)  
