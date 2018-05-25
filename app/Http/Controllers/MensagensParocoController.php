@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\FCMService;
 use App\MensagensParoco;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use LaravelFCM\Message\PayloadDataBuilder;
 
 class MensagensParocoController extends Controller
 {
@@ -13,9 +16,18 @@ class MensagensParocoController extends Controller
         return response()->json(MensagensParoco::all());
     }
 
+    public function paginacao()
+    {
+        return response()->json(DB::table('mensagens_parocos')->paginate(15));
+    }
+
     public function store(Request $request)
     {
         $mensagensParoco = MensagensParoco::create($request->all());
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData(['click_action' => 'MensagemParocoActivity']);
+        $data = $dataBuilder->build();
+        FCMService::sendPushNotificationToTopic($mensagensParoco->titulo, $mensagensParoco->mensagem, 'all', $data);
         return response()->json(['message' => 'Adicionado com sucesso']);
     }
 

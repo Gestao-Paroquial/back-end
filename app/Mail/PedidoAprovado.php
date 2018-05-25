@@ -29,7 +29,7 @@ class PedidoAprovado extends Mailable
      */
     public function build()
     {
-        return $this->view('email.pedidoAprovado')
+        return $this->markdown('email.pedidoAprovado')
             ->with([
                 'link' => $this->pedido->link,
                 'nome' => $this->pedido->nome,

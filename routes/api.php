@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -11,7 +9,7 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
 Route::post('uploadImagem', ['uses' => 'ImagesController@save']);
 Route::resource('agenda', 'AgendasController');
@@ -20,6 +18,7 @@ Route::resource('batismos', 'BatismosController');
 Route::resource('casamentos', 'CasamentosController');
 Route::resource('comunidades', 'ComunidadesController');
 Route::resource('dizimos', 'DizimosController');
+
 Route::resource('doacoes', 'DoacoesController');
 Route::resource('eventosHome', 'EventosHomeController');
 Route::resource('users', 'UsersController');
@@ -37,12 +36,12 @@ Route::post('login', 'AuthController@login');
 Route::post('recover', 'AuthController@recover');
 Route::get('user/verify/{verification_code}', 'AuthController@verifyUser');
 
-Route::group(['middleware' => ['jwt.auth']], function() {
+Route::group(['middleware' => ['jwt.auth']], function () {
     Route::get('logout', 'AuthController@logout');
 
     //Rota para validar os tokens
-    Route::get('validateToken', function(){
-        return response()->json(['success'=>true]);
+    Route::get('validateToken', function () {
+        return response()->json(['success' => true]);
     });
 });
 
@@ -52,12 +51,15 @@ Route::get('membros/relatorio/agrupadoPorTipo', 'MembrosController@relatorioAgru
 Route::get('agenda/relatorio/agrupadoPorTipoDeEvento/{dateFilter}', 'AgendasController@relatorioAgrupadoPorTipo');
 Route::get('aniversariantes/{month}', 'MembrosController@aniversariantesDoMes');
 Route::resource('mensagensParoco', 'MensagensParocoController');
+Route::get('mensagensParocoPaginacao', 'MensagensParocoController@paginacao');
+
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
 
+Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
 
 Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
-Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
+
 Route::post('liturgia','LiturgiaDiariaController@storeDailyLiturgy');
 Route::get('liturgia/{year}/{month}/{day}','LiturgiaDiariaController@showDailyLiturgyFiltered');
