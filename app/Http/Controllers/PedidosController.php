@@ -80,7 +80,7 @@ class PedidosController extends Controller
     {
         try {
             Mail::to($pedido->email)->send(new PedidoAprovado($pedido));
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }       
     }
@@ -89,9 +89,8 @@ class PedidosController extends Controller
     {
         try {
             Mail::to($pedido->email)->send(new PedidoReprovado($conteudoEmail));
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
     }
-
 }
