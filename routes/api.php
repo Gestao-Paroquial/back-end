@@ -56,15 +56,8 @@ Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
 
-Route::resource('pagseguro', 'PagseguroController');
-Route::post('/registrarPedidoDeCasamento','PedidosController@registrarPedidoCasamento');
-Route::get('/pagamento',function(){ return "passou pagamento";})->name('pagseguro.redirect');
 
-Route::post('notificacao', [
-    'uses' => '\laravel\pagseguro\Platform\Laravel5\NotificationController@notification',
-    'as' => 'pagseguro.notification',
-]);
-Route::post('santododia','SantoDoDiaController@storeSaintOfDay');
-
+Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
+Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
 Route::post('liturgia','LiturgiaDiariaController@storeDailyLiturgy');
 Route::get('liturgia/{year}/{month}/{day}','LiturgiaDiariaController@showDailyLiturgyFiltered');
