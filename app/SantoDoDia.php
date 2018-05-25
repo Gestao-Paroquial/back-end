@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SantoDoDia extends Model
 {
-    protected $fillable = ['id','nome','historia'];
-    protected $guarded = ['id', 'created_at', 'update_at'];
-    //,'dia','imagem','titulo_historia'
+    protected $fillable = ['name','history','day','month','image'];
+    protected $guarded = ['id', 'created_at', 'update_at'];    
 }

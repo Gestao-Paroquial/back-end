@@ -56,5 +56,10 @@ Route::get('mensagensParocoPaginacao', 'MensagensParocoController@paginacao');
 Route::resource('note', 'NoteController');
 Route::resource('pastorais', 'PastoraisController');
 Route::resource('pedidos', 'PedidosController');
-Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
+
 Route::post('pagseguro/notificacao', '\App\Http\Services\PagSeguroService@notificacao');
+
+Route::get('santododia','SantoDoDiaController@storeSaintOfDay');
+
+Route::post('liturgia','LiturgiaDiariaController@storeDailyLiturgy');
+Route::get('liturgia/{year}/{month}/{day}','LiturgiaDiariaController@showDailyLiturgyFiltered');

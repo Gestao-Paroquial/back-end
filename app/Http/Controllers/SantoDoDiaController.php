@@ -21,8 +21,17 @@ class SantoDoDiaController extends Controller
         }); 
         $month = $crawler->filter('.content-header .mes')->each(function ($node) {            
             return $node->text();            
-        });                
-        $strTitle = implode("",$title);
+        });
+        $file = array(
+            'image' => 'http://img.cancaonova.com/cnimages/canais/uploads/sites/2/2013/02/beatos-francisco-e-jacinta.jpg'
+        );
+        $imageRequest = Goutte::request('POST','http://localhost:8000/api/uploadImagem',array(),$file); 
+        $history = [];
+        $request = end($history)['request'];       
+        
+        //$image = $crawler->selectImage('')->image();
+        return print($request->getBody());
+        /*$strTitle = implode("",$title);
         $strHistory = implode("",$history);
         $strDay = implode("",$day);
         $strMonth = implode("",$month);
@@ -31,7 +40,8 @@ class SantoDoDiaController extends Controller
         $santoDoDia->historia = $strHistory;
         $santoDoDia->dia = $strDay;
         $santoDoDia->mes = $strMonth;
-        $santoDoDia->save();        
-        return response()->json(['Santo'=>$strTitle, 'História'=>$strHistory, 'Mês'=>$strMonth, 'Dia'=>$strDay]);
-    }
+        $santoDoDia->save();*/        
+        //return response()->json(['Santo'=>$strTitle, 'História'=>$strHistory, 'Mês'=>$strMonth, 'Dia'=>$strDay]);
+        
+    }   
 }
