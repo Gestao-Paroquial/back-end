@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\FCMService;
 use App\MensagensParoco;
+use JWTAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use LaravelFCM\Message\PayloadDataBuilder;
@@ -13,7 +14,12 @@ class MensagensParocoController extends Controller
 
     public function index()
     {
-        return response()->json(MensagensParoco::all());
+        $mensagensParoco = new MensagensParoco();
+
+        $result = $mensagensParoco
+                    ->with('user:id,name')
+                    ->get();
+        return $result;
     }
 
     public function paginacao()
@@ -23,6 +29,8 @@ class MensagensParocoController extends Controller
 
     public function store(Request $request)
     {
+        $user = JWTAuth::parseToken()->toUser();
+        $request->merge(['user_id' => $user->id]);
         $mensagensParoco = MensagensParoco::create($request->all());
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData(['click_action' => 'MensagemParocoActivity']);

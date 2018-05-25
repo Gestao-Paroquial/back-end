@@ -20,8 +20,13 @@ class CreateMensagemParocosTable extends Migration
             $table->mediumText('mensagem'); 
             $table->string('link',200)->nullable(); 
             $table->boolean('excluido')->default(false);
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
             
+            $table->foreign('user_id')
+                            ->references('id')
+                            ->on('users')
+                            ->onDelete('cascade');
         });
     }
 
