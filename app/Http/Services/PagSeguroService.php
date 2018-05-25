@@ -103,19 +103,23 @@ class PagSeguroService
             $code = $purchase->getDetails()->getStatus();
             $item = $purchase->getItems()[0];
             $id = $item ->getId(); 
-            $description = $item->getDescription();
+            $description = $item->getDescription();            
             
             if ($description == Doacoe::DESCRICAO_PAGSEGURO) {
                 $doacao = Doacoe::findOrFail($id);
                 $doacao->code = $code;
                 $doacao->save();
                 if ($code == 4) {
-                    $this->sendRequestToBillingCycle($doacao);
+                    $this->sendDonationBillingCycle($doacao);
                 }
             } else {
                 $pedido = Pedido::findOrFail($id);
                 $pedido->code = $code;
                 $pedido->save();
+                if ($code == 4) {
+                    $amount = $item->getAmount();
+                    $this->sendPedidoBillingCycle($pedido, $amount);
+                }
             }           
 
             
@@ -124,14 +128,20 @@ class PagSeguroService
         }
     }
 
-    private function sendRequestToBillingCycle($doacao){
+    private function sendDonationBillingCycle($doacao){
         $query = '
-        mutation AddToDonationGroup($donationGroup: String! ,$credit: DebtInput!) {
+        mutation AddToDonationGroup($donationGroup: String!, $credit: CreditInput!) {
             addToDonationGroup(donationGroup: $donationGroup, credit: $credit) {
               id
             }
           }
-        ';
+        ';      
+    
+        $credit = [
+                "name" => "Doação efetuada em ".date("d-m-Y"),
+                "value" => $doacao->valor,
+                "donationId" => $doacao->id,
+        ];
 
         $meses = array(
             '01'=>'Janeiro',
@@ -146,19 +156,77 @@ class PagSeguroService
             '10'=>'Outubro',
             '11'=>'Novembro',
             '12'=>'Dezembro'
-        );        
-    
-        $credit = [
-                "name" => "Doação efetuada em ".date("d-m-Y"),
-                "value" => $doacao->valor,
-                "donationId" => $doacao->id,
-        ];
+        );
 
         $donationGroup = $meses[date('m')]. ' de '. date('Y');
         
         $variables = [
             'credit' =>  $credit,
             'donationGroup' => $donationGroup,
+        ];
+        
+        $json = json_encode(['query' => $query, 'variables' => $variables]);
+
+        $user = DB::table('users')->first();
+
+        $token =  JWTAuth::attempt([
+            "email" => $user->email,
+            "password" => '1234',
+            "is_verified" => 1
+        ]);
+        
+        $chObj = curl_init();
+        curl_setopt($chObj, CURLOPT_URL, env('GRAPHQL_SERVER'));
+        curl_setopt($chObj, CURLOPT_RETURNTRANSFER, true);    
+        curl_setopt($chObj, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($chObj, CURLOPT_HEADER, true);
+        curl_setopt($chObj, CURLOPT_VERBOSE, true);
+        curl_setopt($chObj, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($chObj, CURLOPT_HTTPHEADER,
+             array(
+                    'User-Agent: PHP Script',
+                    'Content-Type: application/json;charset=utf-8',
+                    'Authorization: Bearer '.$token
+                )
+            ); 
+    
+        $response = curl_exec($chObj);
+    }
+    private function sendPedidoBillingCycle($pedido, $amount){
+        $query = '
+        mutation AddToPedidoGroup($pedidoGroup: String!, $credit: CreditInput!) {
+            addToPedidoGroup(pedidoGroup: $pedidoGroup, credit: $credit) {
+              id
+            }
+          }
+        ';      
+    
+        $credit = [
+                "name" => "Pedido efetuada em ".date("d-m-Y"),
+                "value" => $amount,
+                "donationId" => $pedido->id,
+        ];
+
+        $meses = array(
+            '01'=>'Janeiro',
+            '02'=>'Fevereiro',
+            '03'=>'Março',
+            '04'=>'Abril',
+            '05'=>'Maio',
+            '06'=>'Junho',
+            '07'=>'Julho',
+            '08'=>'Agosto',
+            '09'=>'Setembro',
+            '10'=>'Outubro',
+            '11'=>'Novembro',
+            '12'=>'Dezembro'
+        );
+
+        $pedidoGroup = $meses[date('m')]. ' de '. date('Y');
+        
+        $variables = [
+            'credit' =>  $credit,
+            'pedidoGroup' => $pedidoGroup,
         ];
         
         $json = json_encode(['query' => $query, 'variables' => $variables]);
